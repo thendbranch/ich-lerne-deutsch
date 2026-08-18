@@ -25,105 +25,392 @@
     </script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #080d1a;
+        }
         
-        /* Kart üzerine gelindiğinde parlayan kenarlık animasyonu */
-        .glow-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .glow-card:hover { transform: translateY(-8px); }
+        .glow-card { 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .glow-card:hover { 
+            transform: translateY(-8px); 
+        }
+
+        /* Mobil Özel Düzenlemeler */
+        @media (max-width: 640px) {
+            .glow-card {
+                padding: 24px 20px !important;
+                border-radius: 24px !important;
+            }
+            
+            .glow-card .w-16 {
+                width: 56px;
+                height: 56px;
+                font-size: 24px;
+                margin-bottom: 16px !important;
+            }
+            
+            .glow-card h3 {
+                font-size: 20px !important;
+            }
+            
+            .glow-card p {
+                font-size: 13px !important;
+                margin-bottom: 16px !important;
+            }
+            
+            .glow-card .py-4 {
+                padding-top: 12px !important;
+                padding-bottom: 12px !important;
+                font-size: 13px !important;
+            }
+            
+            .bg-slate-950.rounded-\[2rem\] {
+                padding: 24px 20px !important;
+                border-radius: 24px !important;
+            }
+            .bg-slate-950.rounded-\[2rem\] .w-16 {
+                width: 56px;
+                height: 56px;
+                font-size: 24px;
+                margin-bottom: 16px !important;
+            }
+            .bg-slate-950.rounded-\[2rem\] h3 {
+                font-size: 20px !important;
+            }
+            .bg-slate-950.rounded-\[2rem\] p {
+                font-size: 13px !important;
+                margin-bottom: 16px !important;
+            }
+            .bg-slate-950.rounded-\[2rem\] .py-4 {
+                padding-top: 12px !important;
+                padding-bottom: 12px !important;
+                font-size: 13px !important;
+            }
+            
+            .absolute.top-6.right-6 {
+                top: 16px !important;
+                right: 16px !important;
+                width: 36px !important;
+                height: 36px !important;
+                font-size: 12px !important;
+            }
+            
+            h1.text-4xl {
+                font-size: 28px !important;
+            }
+            
+            .space-y-12 {
+                space-y: 32px !important;
+            }
+            
+            .grid.gap-6 {
+                gap: 16px !important;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .glow-card {
+                padding: 20px 16px !important;
+                border-radius: 20px !important;
+            }
+            
+            .glow-card .w-16 {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                margin-bottom: 12px !important;
+            }
+            
+            .glow-card h3 {
+                font-size: 18px !important;
+            }
+            
+            .glow-card p {
+                font-size: 12px !important;
+            }
+            
+            .bg-slate-950.rounded-\[2rem\] {
+                padding: 20px 16px !important;
+                border-radius: 20px !important;
+            }
+            .bg-slate-950.rounded-\[2rem\] .w-16 {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                margin-bottom: 12px !important;
+            }
+            .bg-slate-950.rounded-\[2rem\] h3 {
+                font-size: 18px !important;
+            }
+            .bg-slate-950.rounded-\[2rem\] p {
+                font-size: 12px !important;
+            }
+            
+            h1.text-4xl {
+                font-size: 24px !important;
+            }
+            
+            .space-y-12 {
+                space-y: 24px !important;
+            }
+        }
+
+        /* Grid responsive */
+        .levels-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .levels-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+        }
+
+        /* Kilitli kart stili */
+        .locked-card {
+            background: rgba(15, 23, 42, 0.5);
+            border-color: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(4px);
+            cursor: not-allowed;
+            position: relative;
+            overflow: hidden;
+        }
+        .locked-card .lock-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(30, 41, 59, 0.8);
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            border: 1px solid rgba(51, 65, 85, 0.8);
+            z-index: 5;
+        }
+        .locked-card .level-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: #1e293b;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            flex-shrink: 0;
+        }
+        .locked-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+        .locked-card p {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .locked-card .locked-btn {
+            width: 100%;
+            padding: 16px;
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            color: #64748b;
+            font-weight: 700;
+            font-size: 14px;
+            text-align: center;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 640px) {
+            .locked-card .lock-badge {
+                width: 36px;
+                height: 36px;
+                font-size: 12px;
+                top: 12px;
+                right: 12px;
+            }
+            .locked-card .level-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 20px;
+                margin-bottom: 16px;
+            }
+            .locked-card h3 {
+                font-size: 20px;
+            }
+            .locked-card p {
+                font-size: 13px;
+                margin-bottom: 16px;
+            }
+            .locked-card .locked-btn {
+                padding: 12px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .locked-card .lock-badge {
+                width: 32px;
+                height: 32px;
+                font-size: 11px;
+                top: 10px;
+                right: 10px;
+            }
+            .locked-card .level-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+            .locked-card h3 {
+                font-size: 18px;
+            }
+            .locked-card p {
+                font-size: 12px;
+                margin-bottom: 12px;
+            }
+            .locked-card .locked-btn {
+                padding: 10px;
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
-<body class="bg-slate-950 min-h-screen flex flex-col justify-center items-center p-6 relative overflow-hidden selection:bg-sky-500 selection:text-white">
+<body class="min-h-screen flex flex-col justify-center items-center p-4 sm:p-6 relative overflow-hidden selection:bg-sky-500 selection:text-white">
 
     <!-- ARKA PLAN IŞIK EFEKTLERİ -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-sky-600/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-emerald-600/10 blur-[100px] rounded-full pointer-events-none z-0"></div>
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-sky-600/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
+    <div class="fixed bottom-0 right-0 w-96 h-96 bg-emerald-600/10 blur-[100px] rounded-full pointer-events-none z-0"></div>
+    <div class="fixed bottom-0 left-0 w-72 h-72 bg-violet-600/5 blur-[100px] rounded-full pointer-events-none z-0"></div>
 
-    <div class="w-full max-w-5xl z-10 space-y-12 text-center">
-        
+    <!-- GERİ BUTONU (ÜST) -->
+    <div class="fixed top-4 left-4 sm:top-8 sm:left-8 z-20">
+        <button onclick="window.location.href='anasayfa.html'" class="flex items-center gap-2 text-slate-400 hover:text-white font-semibold transition-all group bg-slate-900/80 backdrop-blur-sm px-4 py-2 rounded-full border border-slate-800">
+            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
+                <i class="fa-solid fa-arrow-left text-sm"></i>
+            </div>
+            <span class="hidden sm:inline">Ana Sayfa</span>
+            <span class="sm:hidden">Geri</span>
+        </button>
+    </div>
+
+    <div class="w-full max-w-5xl z-10 space-y-8 sm:space-y-12 text-center px-2">
+
         <!-- BAŞLIK ALANI -->
-        <div class="space-y-4">
-            <h2 class="text-sky-400 font-bold tracking-widest text-sm uppercase flex items-center justify-center gap-2">
-                <i class="fa-solid fa-map-location-dot"></i> Yol Haritası
+        <div class="space-y-3 sm:space-y-4">
+            <h2 class="text-sky-400 font-bold tracking-widest text-[11px] sm:text-sm uppercase flex items-center justify-center gap-2">
+                <i class="fa-solid fa-map-location-dot"></i> 
+                <span class="hidden sm:inline">Yol Haritası</span>
+                <span class="sm:hidden">Yol Haritası</span>
             </h2>
-            <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight">
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
                 Dil Serüvenine Başla
             </h1>
-            <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+            <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed px-2">
                 Hedefine giden yolda mevcut konumunu seç. Modern, ferah ve tamamen senin öğrenme hızına göre kurgulanmış modüllerle adım adım ilerle.
             </p>
         </div>
 
         <!-- SEVİYE KARTLARI (GRID) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+        <div class="levels-grid">
 
             <!-- A1 SEVİYESİ (AÇIK/AKTİF) -->
-            <div onclick="window.location.href='anasayfa.html'" class="glow-card cursor-pointer bg-slate-900/80 backdrop-blur-sm border border-sky-500/40 hover:border-sky-400 rounded-[2rem] p-8 flex flex-col h-full shadow-[0_0_30px_rgba(14,165,233,0.1)] hover:shadow-[0_0_40px_rgba(14,165,233,0.25)] relative overflow-hidden group">
+            <div onclick="window.location.href='anasayfa.html'" class="glow-card cursor-pointer bg-slate-900/80 backdrop-blur-sm border border-sky-500/40 hover:border-sky-400 rounded-[2rem] p-6 sm:p-8 flex flex-col h-full shadow-[0_0_30px_rgba(14,165,233,0.1)] hover:shadow-[0_0_40px_rgba(14,165,233,0.25)] relative overflow-hidden group">
                 <!-- Arka plan parlaklık detayı -->
                 <div class="absolute -right-10 -top-10 w-32 h-32 bg-sky-500/20 blur-3xl rounded-full group-hover:bg-sky-500/30 transition-all"></div>
                 
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-sky-500/30 mb-6">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-sky-500/30 mb-4 sm:mb-6 flex-shrink-0 relative z-10">
                     A1
                 </div>
                 
-                <div class="flex-1">
-                    <h3 class="text-2xl font-bold text-white mb-2">Başlangıç</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed mb-6">
+                <div class="flex-1 relative z-10">
+                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-2">Başlangıç</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-4 sm:mb-6">
                         Almancanın temellerini at. Sayılar, kişi zamirleri, temel fiil çekimleri ve basit cümle kurma mantığı.
                     </p>
                 </div>
                 
-                <div class="w-full py-4 bg-sky-500/10 group-hover:bg-sky-500 text-sky-400 group-hover:text-white font-bold text-sm text-center rounded-xl transition-colors flex items-center justify-center gap-2">
+                <div class="w-full py-3 sm:py-4 bg-sky-500/10 group-hover:bg-sky-500 text-sky-400 group-hover:text-white font-bold text-sm text-center rounded-xl transition-all duration-300 flex items-center justify-center gap-2 relative z-10">
                     Eğitime Başla <i class="fa-solid fa-arrow-right"></i>
                 </div>
             </div>
 
             <!-- A2 SEVİYESİ (KİLİTLİ) -->
-            <div class="bg-slate-950 border border-slate-800 rounded-[2rem] p-8 flex flex-col h-full relative opacity-70 cursor-not-allowed">
+            <div class="locked-card rounded-[2rem] p-6 sm:p-8 flex flex-col h-full">
                 <!-- Kilit Rozeti -->
-                <div class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-800 text-slate-500 flex items-center justify-center text-sm border border-slate-700">
+                <div class="lock-badge">
                     <i class="fa-solid fa-lock"></i>
                 </div>
 
-                <div class="w-16 h-16 rounded-2xl bg-slate-800 text-slate-500 flex items-center justify-center text-2xl font-black mb-6">
+                <div class="level-icon">
                     A2
                 </div>
                 
                 <div class="flex-1">
-                    <h3 class="text-2xl font-bold text-slate-300 mb-2">Temel İletişim</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed mb-6">
+                    <h3>Temel İletişim</h3>
+                    <p>
                         Geçmiş zaman, bağlaçlar, detaylı günlük rutinler ve karmaşık cümle yapıları.
                     </p>
                 </div>
                 
-                <div class="w-full py-4 bg-slate-900 border border-slate-800 text-slate-500 font-bold text-sm text-center rounded-xl flex items-center justify-center gap-2">
+                <div class="locked-btn">
                     A1'i Tamamla
                 </div>
             </div>
 
             <!-- B1 SEVİYESİ (KİLİTLİ) -->
-            <div class="bg-slate-950 border border-slate-800 rounded-[2rem] p-8 flex flex-col h-full relative opacity-70 cursor-not-allowed">
+            <div class="locked-card rounded-[2rem] p-6 sm:p-8 flex flex-col h-full">
                 <!-- Kilit Rozeti -->
-                <div class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-800 text-slate-500 flex items-center justify-center text-sm border border-slate-700">
+                <div class="lock-badge">
                     <i class="fa-solid fa-lock"></i>
                 </div>
 
-                <div class="w-16 h-16 rounded-2xl bg-slate-800 text-slate-500 flex items-center justify-center text-2xl font-black mb-6">
+                <div class="level-icon">
                     B1
                 </div>
                 
                 <div class="flex-1">
-                    <h3 class="text-2xl font-bold text-slate-300 mb-2">Bağımsız Kullanıcı</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed mb-6">
+                    <h3>Bağımsız Kullanıcı</h3>
+                    <p>
                         Mesleki Almanca, fikir beyan etme, yan cümleler ve ileri seviye dilbilgisi kuralları.
                     </p>
                 </div>
                 
-                <div class="w-full py-4 bg-slate-900 border border-slate-800 text-slate-500 font-bold text-sm text-center rounded-xl flex items-center justify-center gap-2">
+                <div class="locked-btn">
                     Sonraki Hedef
                 </div>
             </div>
 
         </div>
+
+        <!-- ALT BİLGİ / İLERLEME -->
+        <div class="pt-4 sm:pt-6 border-t border-slate-800/50 max-w-sm mx-auto">
+            <div class="flex items-center justify-center gap-2 text-slate-500 text-xs">
+                <i class="fa-regular fa-circle-check text-emerald-400"></i>
+                <span>A1 Seviyesi açık</span>
+                <span class="w-1 h-1 rounded-full bg-slate-700"></span>
+                <i class="fa-solid fa-lock text-slate-600"></i>
+                <span>2 seviye kilitli</span>
+            </div>
+        </div>
+
     </div>
 
 </body>

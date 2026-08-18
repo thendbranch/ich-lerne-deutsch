@@ -21,10 +21,141 @@
     </script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #080d1a; color: #f1f5f9; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #080d1a; 
+            color: #f1f5f9; 
+        }
         
-        .topic-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background-color: rgba(15, 23, 42, 0.8); }
-        .topic-card:hover { transform: translateY(-6px); }
+        .topic-card { 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(4px);
+            border-width: 1px;
+        }
+        .topic-card:hover { 
+            transform: translateY(-6px); 
+        }
+
+        /* Mobil özel düzenlemeler */
+        @media (max-width: 640px) {
+            .topic-card {
+                padding: 20px 16px !important;
+                border-radius: 20px !important;
+            }
+            .topic-card .w-14 {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+            .topic-card h3 {
+                font-size: 17px !important;
+            }
+            .topic-card p {
+                font-size: 13px !important;
+            }
+            .topic-card .text-xs {
+                font-size: 9px !important;
+            }
+            .topic-card .mt-6 {
+                margin-top: 16px !important;
+            }
+            .topic-card .text-sm {
+                font-size: 12px !important;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .topic-card {
+                padding: 16px 14px !important;
+                border-radius: 16px !important;
+            }
+            .topic-card .w-14 {
+                width: 40px;
+                height: 40px;
+                font-size: 17px;
+            }
+            .topic-card h3 {
+                font-size: 15px !important;
+            }
+        }
+
+        /* Grid responsive iyileştirme */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .topics-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .topics-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 28px;
+            }
+        }
+
+        /* Kilitli kart stili */
+        .locked-card {
+            position: relative;
+            overflow: hidden;
+            background-color: rgba(15, 23, 42, 0.5);
+            border-color: rgba(30, 41, 59, 0.8);
+            cursor: not-allowed;
+        }
+        .locked-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(8, 13, 26, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        .locked-overlay .lock-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .locked-overlay h4 {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 14px;
+        }
+        .locked-overlay p {
+            font-size: 10px;
+            color: #94a3b8;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 640px) {
+            .locked-overlay .lock-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 17px;
+            }
+            .locked-overlay h4 {
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white relative">
@@ -40,39 +171,42 @@
                 <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
                     <i class="fa-solid fa-arrow-left text-sm"></i>
                 </div>
-                <span>Karargaha Dön</span>
+                <span class="hidden sm:inline">Karargaha Dön</span>
+                <span class="sm:hidden">Geri</span>
             </button>
             <div class="flex items-center gap-2">
                 <span class="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold flex items-center gap-1.5">
-                    <i class="fa-solid fa-book-open text-sky-400"></i> Teori Merkezi
+                    <i class="fa-solid fa-book-open text-sky-400"></i>
+                    <span class="hidden sm:inline">Teori Merkezi</span>
+                    <span class="sm:hidden">Teori</span>
                 </span>
             </div>
         </div>
     </header>
 
     <!-- ANA İÇERİK -->
-    <main class="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-8 space-y-8 relative z-10 pb-20">
+    <main class="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-8 space-y-6 sm:space-y-8 relative z-10 pb-20">
 
         <!-- BAŞLIK -->
-        <div class="space-y-3">
-            <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">A1 Konu Anlatımları</h1>
-            <p class="text-slate-400 text-sm sm:text-base max-w-2xl leading-relaxed">
+        <div class="space-y-2 sm:space-y-3 text-center sm:text-left">
+            <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight">A1 Konu Anlatımları</h1>
+            <p class="text-slate-400 text-sm sm:text-base max-w-2xl leading-relaxed mx-auto sm:mx-0">
                 Almancanın şifrelerini çözdüğümüz alana hoş geldin. Öğrenmek istediğin konuyu seç ve kuralları keşfet.
             </p>
         </div>
 
         <!-- KONULAR GRID -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="topics-grid">
 
             <!-- KART 1: SAYILAR (Zahlen) -->
             <div onclick="window.location.href='konu_sayilar.html'" class="topic-card border border-sky-500/20 hover:border-sky-500/50 rounded-3xl p-6 cursor-pointer group shadow-lg hover:shadow-[0_10px_30px_rgba(14,165,233,0.15)] flex flex-col h-full relative overflow-hidden">
                 <div class="absolute -right-6 -top-6 w-24 h-24 bg-sky-500/10 blur-2xl rounded-full group-hover:bg-sky-500/20 transition-all"></div>
                 
                 <div class="flex justify-between items-start mb-4">
-                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 text-white flex items-center justify-center text-2xl font-black shadow-md shadow-sky-500/20">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 text-white flex items-center justify-center text-2xl font-black shadow-md shadow-sky-500/20 flex-shrink-0">
                         🔢
                     </div>
-                    <span class="px-2.5 py-1 rounded-lg bg-sky-500/10 text-sky-400 text-[10px] font-black uppercase tracking-widest border border-sky-500/20">
+                    <span class="px-2.5 py-1 rounded-lg bg-sky-500/10 text-sky-400 text-[10px] font-black uppercase tracking-widest border border-sky-500/20 whitespace-nowrap">
                         Açık
                     </span>
                 </div>
@@ -94,10 +228,10 @@
                 <div class="absolute -right-6 -top-6 w-24 h-24 bg-emerald-500/10 blur-2xl rounded-full group-hover:bg-emerald-500/20 transition-all"></div>
                 
                 <div class="flex justify-between items-start mb-4">
-                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 text-white flex items-center justify-center text-2xl font-black shadow-md shadow-emerald-500/20">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 text-white flex items-center justify-center text-2xl font-black shadow-md shadow-emerald-500/20 flex-shrink-0">
                         👥
                     </div>
-                    <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
+                    <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20 whitespace-nowrap">
                         Açık
                     </span>
                 </div>
@@ -119,10 +253,10 @@
                 <div class="absolute -right-6 -top-6 w-24 h-24 bg-violet-500/10 blur-2xl rounded-full group-hover:bg-violet-500/20 transition-all"></div>
                 
                 <div class="flex justify-between items-start mb-4">
-                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-600 text-white flex items-center justify-center text-2xl font-black shadow-md shadow-violet-500/20">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-600 text-white flex items-center justify-center text-2xl font-black shadow-md shadow-violet-500/20 flex-shrink-0">
                         ⚙️
                     </div>
-                    <span class="px-2.5 py-1 rounded-lg bg-violet-500/10 text-violet-400 text-[10px] font-black uppercase tracking-widest border border-violet-500/20">
+                    <span class="px-2.5 py-1 rounded-lg bg-violet-500/10 text-violet-400 text-[10px] font-black uppercase tracking-widest border border-violet-500/20 whitespace-nowrap">
                         Açık
                     </span>
                 </div>
@@ -140,26 +274,79 @@
             </div>
 
             <!-- KART 4: SELAMLAŞMA (KİLİTLİ) -->
-            <div class="border border-slate-800 rounded-3xl p-6 bg-slate-950 flex flex-col h-full relative overflow-hidden opacity-75 cursor-not-allowed">
+            <div class="topic-card locked-card border border-slate-700 rounded-3xl p-6 flex flex-col h-full relative overflow-hidden opacity-75">
+                
                 <!-- Kilit Katmanı -->
-                <div class="absolute inset-0 bg-slate-950/50 backdrop-blur-[2px] z-10 flex flex-col items-center justify-center p-6 text-center">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl font-bold mb-2">
+                <div class="locked-overlay">
+                    <div class="lock-icon">
                         <i class="fa-solid fa-lock"></i>
                     </div>
-                    <h4 class="font-bold text-white text-sm">Pratik Gerekiyor</h4>
-                    <p class="text-[10px] text-slate-400 mt-1">Açılması için Alıştırmalarda Şampiyon ol!</p>
+                    <h4>Pratik Gerekiyor</h4>
+                    <p>Açılması için Alıştırmalarda Şampiyon ol!</p>
                 </div>
 
-                <div class="flex justify-between items-start mb-4">
-                    <div class="w-14 h-14 rounded-2xl bg-slate-800 text-slate-500 flex items-center justify-center text-2xl font-black">
+                <div class="flex justify-between items-start mb-4 relative z-0">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-800 text-slate-500 flex items-center justify-center text-2xl font-black flex-shrink-0">
                         <i class="fa-solid fa-handshake"></i>
                     </div>
                 </div>
                 
-                <div class="flex-1 space-y-2">
+                <div class="flex-1 space-y-2 relative z-0">
                     <h3 class="text-xl font-bold text-slate-500">4. Selamlaşma</h3>
                     <p class="text-sm text-slate-600 leading-relaxed">
                         Günün saatlerine göre kullanılan temel selamlama ve veda ifadeleri.
+                    </p>
+                </div>
+            </div>
+
+            <!-- KART 5: TANIMLIKLAR (KİLİTLİ - Örnek) -->
+            <div class="topic-card locked-card border border-slate-700 rounded-3xl p-6 flex flex-col h-full relative overflow-hidden opacity-75">
+                
+                <!-- Kilit Katmanı -->
+                <div class="locked-overlay">
+                    <div class="lock-icon">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h4>Pratik Gerekiyor</h4>
+                    <p>Açılması için Alıştırmalarda Şampiyon ol!</p>
+                </div>
+
+                <div class="flex justify-between items-start mb-4 relative z-0">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-800 text-slate-500 flex items-center justify-center text-2xl font-black flex-shrink-0">
+                        <i class="fa-solid fa-hashtag"></i>
+                    </div>
+                </div>
+                
+                <div class="flex-1 space-y-2 relative z-0">
+                    <h3 class="text-xl font-bold text-slate-500">5. Tanımlıklar</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Der, die, das nedir? Belirli ve belirsiz tanımlıkların kullanım kuralları.
+                    </p>
+                </div>
+            </div>
+
+            <!-- KART 6: SORU KALIPLARI (KİLİTLİ - Örnek) -->
+            <div class="topic-card locked-card border border-slate-700 rounded-3xl p-6 flex flex-col h-full relative overflow-hidden opacity-75">
+                
+                <!-- Kilit Katmanı -->
+                <div class="locked-overlay">
+                    <div class="lock-icon">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h4>Pratik Gerekiyor</h4>
+                    <p>Açılması için Alıştırmalarda Şampiyon ol!</p>
+                </div>
+
+                <div class="flex justify-between items-start mb-4 relative z-0">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-800 text-slate-500 flex items-center justify-center text-2xl font-black flex-shrink-0">
+                        <i class="fa-solid fa-question"></i>
+                    </div>
+                </div>
+                
+                <div class="flex-1 space-y-2 relative z-0">
+                    <h3 class="text-xl font-bold text-slate-500">6. Soru Kalıpları</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        W-Fragen (W-Soruları) ve evet/hayır soruları. Almancada soru sorma sanatı.
                     </p>
                 </div>
             </div>
