@@ -6,6 +6,8 @@
     <title>Alıştırmalar - Almanca Dünyası</title>
 
     <meta name="theme-color" content="#080d1a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -21,10 +23,16 @@
     </script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #080d1a; color: #f1f5f9; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #080d1a; 
+            color: #f1f5f9; 
+            /* Mobilde kaydırma esnemelerini ve titremeleri engeller */
+            overscroll-behavior-y: none;
+        }
         
         .practice-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background-color: rgba(15, 23, 42, 0.8); }
-        .practice-card:hover { transform: translateY(-6px); }
+        .practice-card:hover { transform: translateY(-4px); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white relative">
@@ -40,7 +48,7 @@
                 <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
                     <i class="fa-solid fa-arrow-left text-sm"></i>
                 </div>
-                <span>Karargaha Dön</span>
+                <span class="text-xs sm:text-sm">Karargaha Dön</span>
             </button>
             <div class="flex items-center gap-2">
                 <span class="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold flex items-center gap-1.5">
@@ -51,25 +59,25 @@
     </header>
 
     <!-- ANA İÇERİK -->
-    <main class="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-8 space-y-8 relative z-10 pb-20">
+    <main class="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-8 space-y-6 sm:space-y-8 relative z-10 pb-20">
 
         <!-- BAŞLIK -->
-        <div class="space-y-3">
-            <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">A1 Egzersizleri</h1>
-            <p class="text-slate-400 text-sm sm:text-base max-w-2xl leading-relaxed">
+        <div class="space-y-2 sm:space-y-3">
+            <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight">A1 Egzersizleri</h1>
+            <p class="text-slate-400 text-xs sm:text-base max-w-2xl leading-relaxed">
                 Kuralları bilmek yetmez, onları refleks haline getirmek gerekir. Kendini test etmek istediğin modülü seç ve kas hafızanı güçlendir.
             </p>
         </div>
 
         <!-- ALIŞTIRMALAR GRID -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
 
             <!-- KART 1: SAYILAR (Zahlen-Trainer) -->
-            <div onclick="window.location.href='alistirma_sayilar.html'" class="practice-card border border-sky-500/20 hover:border-sky-500/50 rounded-3xl p-6 cursor-pointer group shadow-lg hover:shadow-[0_10px_30px_rgba(14,165,233,0.15)] flex flex-col h-full relative overflow-hidden">
+            <div onclick="window.location.href='alistirma_sayilar.html'" class="practice-card border border-sky-500/25 hover:border-sky-500/50 rounded-3xl p-5 sm:p-6 cursor-pointer group shadow-lg hover:shadow-[0_10px_30px_rgba(14,165,233,0.15)] flex flex-col h-full relative overflow-hidden">
                 <div class="absolute -right-6 -top-6 w-24 h-24 bg-sky-500/10 blur-2xl rounded-full group-hover:bg-sky-500/20 transition-all"></div>
                 
                 <div class="flex justify-between items-start mb-4">
-                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 text-white flex items-center justify-center text-2xl font-black shadow-md shadow-sky-500/20">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 text-white flex items-center justify-center text-xl sm:text-2xl font-black shadow-md shadow-sky-500/20">
                         <i class="fa-solid fa-gamepad"></i>
                     </div>
                     <span class="px-2.5 py-1 rounded-lg bg-sky-500/10 text-sky-400 text-[10px] font-black uppercase tracking-widest border border-sky-500/20">
@@ -78,23 +86,23 @@
                 </div>
                 
                 <div class="flex-1 space-y-2">
-                    <h3 class="text-xl font-bold text-white group-hover:text-sky-400 transition-colors">Sayılar Alıştırması</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
+                    <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-sky-400 transition-colors">Sayılar Alıştırması</h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
                         0'dan 1000'lere uzanan seviyeli eğitim. Rakamsal testler ve metin tabanlı matematik problemleri.
                     </p>
                 </div>
                 
-                <div class="mt-6 flex items-center text-sky-400 text-sm font-bold gap-2 group-hover:gap-3 transition-all">
+                <div class="mt-6 flex items-center text-sky-400 text-xs sm:text-sm font-bold gap-2 group-hover:gap-3 transition-all">
                     Oyna <i class="fa-solid fa-play"></i>
                 </div>
             </div>
 
             <!-- KART 2: ZAMİRLER (Pronomen-Kampı) -->
-            <div onclick="window.location.href='alistirma_zamirler.html'" class="practice-card border border-emerald-500/20 hover:border-emerald-500/50 rounded-3xl p-6 cursor-pointer group shadow-lg hover:shadow-[0_10px_30px_rgba(16,185,129,0.15)] flex flex-col h-full relative overflow-hidden">
+            <div onclick="window.location.href='alistirma_zamirler.html'" class="practice-card border border-emerald-500/25 hover:border-emerald-500/50 rounded-3xl p-5 sm:p-6 cursor-pointer group shadow-lg hover:shadow-[0_10px_30px_rgba(16,185,129,0.15)] flex flex-col h-full relative overflow-hidden">
                 <div class="absolute -right-6 -top-6 w-24 h-24 bg-emerald-500/10 blur-2xl rounded-full group-hover:bg-emerald-500/20 transition-all"></div>
                 
                 <div class="flex justify-between items-start mb-4">
-                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 text-white flex items-center justify-center text-2xl font-black shadow-md shadow-emerald-500/20">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 text-white flex items-center justify-center text-xl sm:text-2xl font-black shadow-md shadow-emerald-500/20">
                         <i class="fa-solid fa-bolt"></i>
                     </div>
                     <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
@@ -103,23 +111,23 @@
                 </div>
                 
                 <div class="flex-1 space-y-2">
-                    <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Zamirler Kampı</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
+                    <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Zamirler Kampı</h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
                         4 aşamalı refleks testi. Hızlı çeviri yap, "Sie" dedektifliği ile tuzağı boz ve eksik özneleri tamamla.
                     </p>
                 </div>
                 
-                <div class="mt-6 flex items-center text-emerald-400 text-sm font-bold gap-2 group-hover:gap-3 transition-all">
+                <div class="mt-6 flex items-center text-emerald-400 text-xs sm:text-sm font-bold gap-2 group-hover:gap-3 transition-all">
                     Kampa Gir <i class="fa-solid fa-play"></i>
                 </div>
             </div>
 
             <!-- KART 3: FİİLLER (Verben-Trainer) -->
-            <div onclick="window.location.href='alistirma_fiiller.html'" class="practice-card border border-violet-500/20 hover:border-violet-500/50 rounded-3xl p-6 cursor-pointer group shadow-lg hover:shadow-[0_10px_30px_rgba(139,92,246,0.15)] flex flex-col h-full relative overflow-hidden">
+            <div onclick="window.location.href='alistirma_fiiller.html'" class="practice-card border border-violet-500/25 hover:border-violet-500/50 rounded-3xl p-5 sm:p-6 cursor-pointer group shadow-lg hover:shadow-[0_10px_30px_rgba(139,92,246,0.15)] flex flex-col h-full relative overflow-hidden">
                 <div class="absolute -right-6 -top-6 w-24 h-24 bg-violet-500/10 blur-2xl rounded-full group-hover:bg-violet-500/20 transition-all"></div>
                 
                 <div class="flex justify-between items-start mb-4">
-                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-600 text-white flex items-center justify-center text-2xl font-black shadow-md shadow-violet-500/20">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-600 text-white flex items-center justify-center text-xl sm:text-2xl font-black shadow-md shadow-violet-500/20">
                         <i class="fa-solid fa-wand-magic-sparkles"></i>
                     </div>
                     <span class="px-2.5 py-1 rounded-lg bg-violet-500/10 text-violet-400 text-[10px] font-black uppercase tracking-widest border border-violet-500/20">
@@ -128,21 +136,21 @@
                 </div>
                 
                 <div class="flex-1 space-y-2">
-                    <h3 class="text-xl font-bold text-white group-hover:text-violet-400 transition-colors">Fiil Çekim Motoru</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
+                    <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-violet-400 transition-colors">Fiil Çekim Motoru</h3>
+                    <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
                         Düzenli fiilleri (Grup 1) doğru takılarla eşleştir. Fiil kökünü bul, özneye göre takıyı giydir ve cümleleri tamamla.
                     </p>
                 </div>
                 
-                <div class="mt-6 flex items-center text-violet-400 text-sm font-bold gap-2 group-hover:gap-3 transition-all">
+                <div class="mt-6 flex items-center text-violet-400 text-xs sm:text-sm font-bold gap-2 group-hover:gap-3 transition-all">
                     Pratiğe Başla <i class="fa-solid fa-play"></i>
                 </div>
             </div>
 
             <!-- KART 4: KELİME KARTLARI (KİLİTLİ) -->
-            <div onclick="window.location.href='kelimepratik.html'" class="practice-card border border-violet-500/20 hover:border-violet-500/50 rounded-3xl p-6 cursor-pointer group shadow-lg hover:shadow-[0_10px_30px_rgba(139,92,246,0.15)] flex flex-col h-full relative overflow-hidden">
+            <div onclick="window.location.href='kelimepratik.html'" class="practice-card border border-violet-500/25 hover:border-violet-500/50 rounded-3xl p-5 sm:p-6 cursor-pointer group shadow-lg hover:shadow-[0_10px_30px_rgba(139,92,246,0.15)] flex flex-col h-full relative overflow-hidden">
                 <!-- Kilit Katmanı -->
-                <div class="absolute inset-0 bg-slate-950/50 backdrop-blur-[2px] z-10 flex flex-col items-center justify-center p-6 text-center">
+                <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px] z-10 flex flex-col items-center justify-center p-6 text-center">
                     <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl font-bold mb-2">
                         <i class="fa-solid fa-lock"></i>
                     </div>
@@ -151,14 +159,14 @@
                 </div>
 
                 <div class="flex justify-between items-start mb-4">
-                    <div class="w-14 h-14 rounded-2xl bg-slate-800 text-slate-500 flex items-center justify-center text-2xl font-black">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-slate-800 text-slate-500 flex items-center justify-center text-xl sm:text-2xl font-black">
                         <i class="fa-solid fa-clone"></i>
                     </div>
                 </div>
                 
                 <div class="flex-1 space-y-2">
-                    <h3 class="text-xl font-bold text-slate-500">Kelime Kartları (Flashcards)</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-500">Kelime Kartları (Flashcards)</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
                         A1 seviyesi en çok kullanılan kelimeler, fiiller ve artikeller için özel tasarlanmış hafıza kartları.
                     </p>
                 </div>

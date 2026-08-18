@@ -31,13 +31,16 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            /* Mobilde taşma ve esneme problemlerini önlemek için */
+            overscroll-behavior-y: none;
         }
     </style>
 </head>
-<body class="bg-slate-950 min-h-screen flex flex-col justify-center selection:bg-sky-500 selection:text-white">
+<body class="bg-slate-950 min-h-screen flex flex-col justify-between selection:bg-sky-500 selection:text-white">
 
-    <div class="flex flex-col items-center justify-center p-6 text-center">
-        <div class="max-w-2xl space-y-8">
+    <!-- Üst boşluk ve esnek yapı için wrapper -->
+    <div class="w-full flex-1 flex flex-col items-center justify-center p-6 text-center my-auto">
+        <div class="max-w-2xl space-y-8 w-full">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-sm font-medium">
                 <span class="flex h-2 w-2 rounded-full bg-sky-400 animate-ping"></span>
                 🎯 A1 - A2 - B1 Almanca Öğrenme Portalı
@@ -52,7 +55,7 @@
             </p>
 
             <!-- YÖNLENDİRME SEVİYE.HTML OLARAK GÜNCELLENDİ -->
-            <button onclick="window.location.href='seviye.html'" class="px-8 py-4 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold text-lg rounded-2xl shadow-xl shadow-sky-500/20 hover:scale-105 transition-all duration-300 flex items-center gap-3 mx-auto">
+            <button onclick="window.location.href='seviye.html'" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold text-lg rounded-2xl shadow-xl shadow-sky-500/20 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 mx-auto">
                 <i class="fa-solid fa-rocket"></i> Dünyaya Giriş Yap
             </button>
         </div>

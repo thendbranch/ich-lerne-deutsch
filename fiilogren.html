@@ -6,6 +6,8 @@
     <title>Alıştırmalar - Almanca Dünyası</title>
 
     <meta name="theme-color" content="#080d1a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -29,10 +31,12 @@
         body { 
             font-family: 'Inter', sans-serif; 
             transition: background-color 0.5s ease;
+            /* Mobilde kaydırma titreşimlerini ve esnemelerini engeller */
+            overscroll-behavior-y: none;
         }
         
         .choice-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .choice-card:hover { transform: translateY(-10px); }
+        .choice-card:hover { transform: translateY(-6px); }
 
         /* =================================================================
            ÖĞRENME MAKİNESİ (ÇALIŞMA EKRANI) STİLLERİ
@@ -57,47 +61,57 @@
         .study-card {
             background: var(--card);
             width: 100%;
-            max-width: 550px; /* Senin güncellediğin genişlik */
+            max-width: 550px;
             border-radius: 24px;
-            padding: 30px 32px 40px 32px;
+            padding: 24px 20px 32px 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.08);
             text-align: center;
             margin: 0 auto;
         }
+        @media (min-width: 640px) {
+            .study-card {
+                padding: 30px 32px 40px 32px;
+            }
+        }
         
         .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .progress-text { font-size: 15px; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; margin: 0; }
-        .sound-btn { background: #f3f4f6; border: none; border-radius: 20px; padding: 6px 12px; font-size: 13px; font-weight: 700; color: var(--text); cursor: pointer; transition: 0.2s; }
+        .progress-text { font-size: 14px; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; margin: 0; }
+        .sound-btn { background: #f3f4f6; border: none; border-radius: 20px; padding: 6px 12px; font-size: 12px; font-weight: 700; color: var(--text); cursor: pointer; transition: 0.2s; }
         .sound-btn:hover { background: #e5e7eb; }
 
         .timer-container { width: 100%; height: 8px; background: #e5e7eb; border-radius: 4px; margin-bottom: 20px; overflow: hidden; }
         .timer-bar { height: 100%; width: 100%; background: var(--green); transition: width 1s linear, background-color 0.3s ease; }
 
-        .stage-badge{ display:inline-block; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; margin-bottom: 14px; }
+        .stage-badge{ display:inline-block; font-size: 12px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; margin-bottom: 12px; }
         .stage-badge.stage1{ background: #dbeafe; color: var(--blue-dark); }
         .stage-badge.stage2{ background: #fef3c7; color: #92400e; }
         .stage-badge.penalty{ background: #fee2e2; color: #991b1b; }
         
-        .turkce-text{ font-size: 40px; font-weight: 800; color: var(--text); margin: 0 0 8px 0; line-height: 1.2; }
-        .okunus-text{ font-size: 19px; color: var(--muted); margin: 0 0 30px 0; }
+        .turkce-text{ font-size: 32px; font-weight: 800; color: var(--text); margin: 0 0 6px 0; line-height: 1.2; }
+        @media (min-width: 640px) { .turkce-text { font-size: 40px; } }
+
+        .okunus-text{ font-size: 17px; color: var(--muted); margin: 0 0 24px 0; }
         .okunus-text span{ font-style: italic; }
         
-        .sentence{ font-size: 30px; font-weight: 700; color: var(--text); line-height: 1.4; margin: 0 0 8px 0; }
+        .sentence{ font-size: 24px; font-weight: 700; color: var(--text); line-height: 1.4; margin: 0 0 6px 0; }
+        @media (min-width: 640px) { .sentence { font-size: 30px; } }
         .sentence b{ color: var(--orange); font-weight: 900; }
-        .sentence .blank-marker{ display:inline-block; min-width: 70px; border-bottom: 3px solid var(--blue); }
+        .sentence .blank-marker{ display:inline-block; min-width: 60px; border-bottom: 3px solid var(--blue); }
         
-        /* YENİ EKLENEN: Türkçe Cümle Çevirisi Stili */
-        .sentence-tr { font-size: 17px; color: var(--muted); margin: 0 0 25px 0; font-weight: 500; }
+        .sentence-tr { font-size: 15px; color: var(--muted); margin: 0 0 20px 0; font-weight: 500; }
+        @media (min-width: 640px) { .sentence-tr { font-size: 17px; } }
         
-        input#answer{ width: 100%; font-size: 26px; text-align: center; padding: 16px 10px; border: 3px solid var(--border); border-radius: 14px; outline: none; color: var(--text); background: #fafafa; transition: border-color 0.2s ease, background-color 0.2s ease; }
+        input#answer{ width: 100%; font-size: 22px; text-align: center; padding: 14px 10px; border: 3px solid var(--border); border-radius: 14px; outline: none; color: var(--text); background: #fafafa; transition: border-color 0.2s ease, background-color 0.2s ease; }
+        @media (min-width: 640px) { input#answer { font-size: 26px; padding: 16px 10px; } }
         input#answer:focus{ border-color: var(--blue); background: #ffffff; }
         input#answer.wrong{ border-color: var(--red); background: #fef2f2; animation: shake 0.4s; }
         input#answer.correct{ border-color: var(--green); background: #f0fdf4; }
         
         @keyframes shake{ 0% { transform: translateX(0); } 20% { transform: translateX(-10px); } 40% { transform: translateX(10px); } 60% { transform: translateX(-8px); } 80% { transform: translateX(8px); } 100% { transform: translateX(0); } }
         
-        .app-buttons{ margin-top: 24px; display:flex; flex-direction: column; gap: 14px; }
-        .app-btn{ font-size: 20px; font-weight: 700; padding: 16px; border-radius: 14px; border: none; cursor: pointer; transition: transform 0.15s ease, background-color 0.15s ease, opacity 0.15s ease; }
+        .app-buttons{ margin-top: 20px; display:flex; flex-direction: column; gap: 12px; }
+        .app-btn{ font-size: 18px; font-weight: 700; padding: 14px; border-radius: 14px; border: none; cursor: pointer; transition: transform 0.15s ease, background-color 0.15s ease, opacity 0.15s ease; }
+        @media (min-width: 640px) { .app-btn { font-size: 20px; padding: 16px; } }
         .app-btn:active{ transform: scale(0.97); }
         
         #checkBtn{ background: var(--blue); color: #fff; }
@@ -109,11 +123,11 @@
         #hintBtn:hover{ background: #f3f4f6; }
         #hintBtn:disabled{ opacity: 0.5; cursor: not-allowed; }
         
-        .hint-box{ margin-top: 16px; font-size: 28px; font-weight: 800; color: var(--blue); min-height: 38px; letter-spacing: 1px; }
-        .feedback{ margin-top: 14px; font-size: 18px; font-weight: 700; min-height: 26px; }
+        .hint-box{ margin-top: 14px; font-size: 24px; font-weight: 800; color: var(--blue); min-height: 32px; letter-spacing: 1px; }
+        .feedback{ margin-top: 12px; font-size: 16px; font-weight: 700; min-height: 24px; }
         .feedback.wrong{ color: var(--red); }
         .feedback.correct{ color: var(--green); }
-        .finished{ font-size: 26px; font-weight: 800; color: var(--green); }
+        .finished{ font-size: 24px; font-weight: 800; color: var(--green); }
         
         .confetti-piece{ position: fixed; top: -20px; width: 10px; height: 16px; opacity: 0.9; z-index: 999; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall{ to{ transform: translateY(110vh) rotate(360deg); opacity: 0.3; } }
@@ -132,7 +146,7 @@
                 <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
                     <i class="fa-solid fa-arrow-left text-sm"></i>
                 </div>
-                <span>Karargaha Dön</span>
+                <span class="text-xs sm:text-sm">Karargaha Dön</span>
             </button>
             <div class="flex items-center gap-2">
                 <span class="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold flex items-center gap-1.5">
@@ -143,45 +157,45 @@
     </header>
 
     <!-- ANA İÇERİK -->
-    <main class="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-8 space-y-12 relative z-10 pb-20 flex flex-col">
+    <main class="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-8 space-y-8 sm:space-y-12 relative z-10 pb-20 flex flex-col justify-start sm:justify-center my-auto">
 
         <!-- BAŞLIK -->
-        <div id="pageTitle" class="space-y-3 text-center md:text-left mt-4">
-            <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">A1 Egzersizleri</h1>
-            <p class="text-slate-400 text-sm sm:text-base max-w-2xl leading-relaxed mx-auto md:mx-0">
-                Kuralları bilmek yetmez, onları refleks haline getirmek gerekir. Kendini test etmek istediğin modülü seç ve kas hafızanı güçlendir.
+        <div id="pageTitle" class="space-y-3 text-center md:text-left mt-2">
+            <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight">A1 Egzersizleri</h1>
+            <p class="text-slate-400 text-xs sm:text-base max-w-2xl leading-relaxed mx-auto md:mx-0">
+                Kuralları bilmek yetmez, onları refleks haline getirmek gerekir. Kendini test etmek istediğin modülü seç ve kas hafızanı güçlendir.[cite: 7]
             </p>
         </div>
 
         <!-- =========================================================
              ANA MENÜ KARTLARI
              ========================================================= -->
-        <div id="mainMenu" class="flex flex-col md:flex-row gap-8 w-full justify-center md:justify-start">
+        <div id="mainMenu" class="flex flex-col md:flex-row gap-6 sm:gap-8 w-full justify-center md:justify-start">
             
-            <div onclick="startApp('fiil')" class="choice-card cursor-pointer bg-slate-900/60 backdrop-blur-md border border-purple-500/30 hover:border-purple-400 rounded-[2.5rem] p-8 flex flex-col items-center text-center shadow-xl hover:shadow-[0_0_50px_rgba(168,85,247,0.2)] group relative overflow-hidden flex-1 max-w-sm">
+            <div onclick="startApp('fiil')" class="choice-card cursor-pointer bg-slate-900/60 backdrop-blur-md border border-purple-500/30 hover:border-purple-400 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 flex flex-col items-center text-center shadow-xl hover:shadow-[0_0_50px_rgba(168,85,247,0.2)] group relative overflow-hidden flex-1 max-w-sm mx-auto md:mx-0 w-full">
                 <div class="absolute -inset-4 bg-gradient-to-b from-purple-500/0 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-purple-400 to-fuchsia-600 text-white flex items-center justify-center text-3xl shadow-lg shadow-purple-500/30 mb-6 group-hover:scale-110 transition-transform duration-500">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-[2rem] bg-gradient-to-br from-purple-400 to-fuchsia-600 text-white flex items-center justify-center text-2xl sm:text-3xl shadow-lg shadow-purple-500/30 mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500">
                     <i class="fa-solid fa-bolt"></i>
                 </div>
-                <h3 class="text-2xl font-black text-white mb-3">Fiil Öğren</h3>
-                <p class="text-sm text-slate-400 leading-relaxed mb-8 flex-1">
-                    Almancada en sık kullanılan fiilleri keşfet, çekim kurallarını kavra ve cümle içinde nasıl kullanıldıklarını öğren.
+                <h3 class="text-xl sm:text-2xl font-black text-white mb-2 sm:mb-3">Fiil Öğren[cite: 7]</h3>
+                <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6 sm:mb-8 flex-1">
+                    Almancada en sık kullanılan fiilleri keşfet, çekim kurallarını kavra ve cümle içinde nasıl kullanıldıklarını öğren.[cite: 7]
                 </p>
-                <div class="w-full py-4 bg-purple-500/10 group-hover:bg-purple-500 text-purple-400 group-hover:text-white font-bold rounded-2xl transition-all duration-300 flex items-center justify-center gap-2">
+                <div class="w-full py-3.5 sm:py-4 bg-purple-500/10 group-hover:bg-purple-500 text-purple-400 group-hover:text-white font-bold text-xs sm:text-sm rounded-2xl transition-all duration-300 flex items-center justify-center gap-2">
                     Hemen Başla <i class="fa-solid fa-play"></i>
                 </div>
             </div>
 
-            <div onclick="startApp('kelime')" class="choice-card cursor-pointer bg-slate-900/60 backdrop-blur-md border border-rose-500/30 hover:border-rose-400 rounded-[2.5rem] p-8 flex flex-col items-center text-center shadow-xl hover:shadow-[0_0_50px_rgba(244,63,94,0.2)] group relative overflow-hidden flex-1 max-w-sm">
+            <div onclick="startApp('kelime')" class="choice-card cursor-pointer bg-slate-900/60 backdrop-blur-md border border-rose-500/30 hover:border-rose-400 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 flex flex-col items-center text-center shadow-xl hover:shadow-[0_0_50px_rgba(244,63,94,0.2)] group relative overflow-hidden flex-1 max-w-sm mx-auto md:mx-0 w-full">
                 <div class="absolute -inset-4 bg-gradient-to-b from-rose-500/0 to-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-rose-400 to-red-600 text-white flex items-center justify-center text-3xl shadow-lg shadow-rose-500/30 mb-6 group-hover:scale-110 transition-transform duration-500">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-[2rem] bg-gradient-to-br from-rose-400 to-red-600 text-white flex items-center justify-center text-2xl sm:text-3xl shadow-lg shadow-rose-500/30 mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500">
                     <i class="fa-solid fa-layer-group"></i>
                 </div>
-                <h3 class="text-2xl font-black text-white mb-3">Kelime Öğren</h3>
-                <p class="text-sm text-slate-400 leading-relaxed mb-8 flex-1">
-                    Günlük hayatta ihtiyacın olacak kelimeleri artikelleriyle birlikte öğren, ezberle ve kelime dağarcığını hızla geliştir.
+                <h3 class="text-xl sm:text-2xl font-black text-white mb-2 sm:mb-3">Kelime Öğren[cite: 7]</h3>
+                <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6 sm:mb-8 flex-1">
+                    Günlük hayatta ihtiyacın olacak kelimeleri artikelleriyle birlikte öğren, ezberle ve kelime dağarcığını hızla geliştir.[cite: 7]
                 </p>
-                <div class="w-full py-4 bg-rose-500/10 group-hover:bg-rose-500 text-rose-400 group-hover:text-white font-bold rounded-2xl transition-all duration-300 flex items-center justify-center gap-2">
+                <div class="w-full py-3.5 sm:py-4 bg-rose-500/10 group-hover:bg-rose-500 text-rose-400 group-hover:text-white font-bold text-xs sm:text-sm rounded-2xl transition-all duration-300 flex items-center justify-center gap-2">
                     Çok Yakında <i class="fa-solid fa-clock"></i>
                 </div>
             </div>
@@ -191,7 +205,7 @@
         <!-- =========================================================
              UYGULAMA ALANI
              ========================================================= -->
-        <div id="appContainer" style="display: none;" class="w-full flex-1 mt-4">
+        <div id="appContainer" style="display: none;" class="w-full flex-1 mt-2">
             <div class="study-card" id="card">
                 <div class="header-row">
                     <div class="progress-text" id="progress">Soru: 1 / 4</div>
@@ -211,7 +225,6 @@
                 
                 <div id="stage2Content" style="display:none;">
                     <p class="sentence" id="sentenceText"></p>
-                    <!-- YENİ EKLENEN: Cümlenin Türkçe Anlamı -->
                     <p class="sentence-tr" id="sentenceTrText"></p>
                 </div>
                 
@@ -235,7 +248,7 @@
    ========================================================================= */
 function startApp(mode) {
     if (mode === 'kelime') {
-        alert("Kelime Öğrenme modülü henüz eklenmedi. Lütfen 'Fiil Öğren' seçeneği ile devam et.");
+        alert("Kelime Öğrenme modülü henüz eklenmedi. Lütfen 'Fiil Öğren' seçeneği ile devam et.");[cite: 7]
         return;
     }
     document.getElementById('mainMenu').style.display = 'none';
@@ -251,7 +264,7 @@ function startApp(mode) {
 }
 
 /* =========================================================================
-   KELİME / CÜMLE VERİ SETİ (Türkçe Çeviriler Eklendi)
+   KELİME / CÜMLE VERİ SETİ
    ========================================================================= */
 const kelimeler = [
     {
@@ -315,7 +328,7 @@ const stage2Content = document.getElementById('stage2Content');
 const turkceEl = document.getElementById('turkce');
 const okunusEl = document.getElementById('okunus');
 const sentenceTextEl = document.getElementById('sentenceText');
-const sentenceTrTextEl = document.getElementById('sentenceTrText'); // Yeni element
+const sentenceTrTextEl = document.getElementById('sentenceTrText');
 const answerEl = document.getElementById('answer');
 const feedbackEl = document.getElementById('feedback');
 const hintBox = document.getElementById('hintBox');
@@ -468,7 +481,6 @@ function loadNextQuestion(){
         stage2Content.style.display = "block";
         const displayHtml = currentQuestion.sentence.text.replace("___", '<span class="blank-marker">&nbsp;</span>');
         sentenceTextEl.innerHTML = displayHtml;
-        // Cümlenin Türkçe çevirisini ekrana yansıtıyoruz
         sentenceTrTextEl.textContent = "(" + currentQuestion.sentence.tr + ")";
         answerEl.placeholder = "Doğru çekimi yaz...";
     }
