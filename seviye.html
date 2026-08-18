@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Seviye Seçimi - Almanca Dünyası</title>
+
+    <meta name="theme-color" content="#080d1a">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Kart üzerine gelindiğinde parlayan kenarlık animasyonu */
+        .glow-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glow-card:hover { transform: translateY(-8px); }
+    </style>
+</head>
+<body class="bg-slate-950 min-h-screen flex flex-col justify-center items-center p-6 relative overflow-hidden selection:bg-sky-500 selection:text-white">
+
+    <!-- ARKA PLAN IŞIK EFEKTLERİ -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-sky-600/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-emerald-600/10 blur-[100px] rounded-full pointer-events-none z-0"></div>
+
+    <div class="w-full max-w-5xl z-10 space-y-12 text-center">
+        
+        <!-- BAŞLIK ALANI -->
+        <div class="space-y-4">
+            <h2 class="text-sky-400 font-bold tracking-widest text-sm uppercase flex items-center justify-center gap-2">
+                <i class="fa-solid fa-map-location-dot"></i> Yol Haritası
+            </h2>
+            <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight">
+                Dil Serüvenine Başla
+            </h1>
+            <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+                Hedefine giden yolda mevcut konumunu seç. Modern, ferah ve tamamen senin öğrenme hızına göre kurgulanmış modüllerle adım adım ilerle.
+            </p>
+        </div>
+
+        <!-- SEVİYE KARTLARI (GRID) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+
+            <!-- A1 SEVİYESİ (AÇIK/AKTİF) -->
+            <div onclick="window.location.href='anasayfa.html'" class="glow-card cursor-pointer bg-slate-900/80 backdrop-blur-sm border border-sky-500/40 hover:border-sky-400 rounded-[2rem] p-8 flex flex-col h-full shadow-[0_0_30px_rgba(14,165,233,0.1)] hover:shadow-[0_0_40px_rgba(14,165,233,0.25)] relative overflow-hidden group">
+                <!-- Arka plan parlaklık detayı -->
+                <div class="absolute -right-10 -top-10 w-32 h-32 bg-sky-500/20 blur-3xl rounded-full group-hover:bg-sky-500/30 transition-all"></div>
+                
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-sky-500/30 mb-6">
+                    A1
+                </div>
+                
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold text-white mb-2">Başlangıç</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-6">
+                        Almancanın temellerini at. Sayılar, kişi zamirleri, temel fiil çekimleri ve basit cümle kurma mantığı.
+                    </p>
+                </div>
+                
+                <div class="w-full py-4 bg-sky-500/10 group-hover:bg-sky-500 text-sky-400 group-hover:text-white font-bold text-sm text-center rounded-xl transition-colors flex items-center justify-center gap-2">
+                    Eğitime Başla <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- A2 SEVİYESİ (KİLİTLİ) -->
+            <div class="bg-slate-950 border border-slate-800 rounded-[2rem] p-8 flex flex-col h-full relative opacity-70 cursor-not-allowed">
+                <!-- Kilit Rozeti -->
+                <div class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-800 text-slate-500 flex items-center justify-center text-sm border border-slate-700">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <div class="w-16 h-16 rounded-2xl bg-slate-800 text-slate-500 flex items-center justify-center text-2xl font-black mb-6">
+                    A2
+                </div>
+                
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold text-slate-300 mb-2">Temel İletişim</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6">
+                        Geçmiş zaman, bağlaçlar, detaylı günlük rutinler ve karmaşık cümle yapıları.
+                    </p>
+                </div>
+                
+                <div class="w-full py-4 bg-slate-900 border border-slate-800 text-slate-500 font-bold text-sm text-center rounded-xl flex items-center justify-center gap-2">
+                    A1'i Tamamla
+                </div>
+            </div>
+
+            <!-- B1 SEVİYESİ (KİLİTLİ) -->
+            <div class="bg-slate-950 border border-slate-800 rounded-[2rem] p-8 flex flex-col h-full relative opacity-70 cursor-not-allowed">
+                <!-- Kilit Rozeti -->
+                <div class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-800 text-slate-500 flex items-center justify-center text-sm border border-slate-700">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <div class="w-16 h-16 rounded-2xl bg-slate-800 text-slate-500 flex items-center justify-center text-2xl font-black mb-6">
+                    B1
+                </div>
+                
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold text-slate-300 mb-2">Bağımsız Kullanıcı</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6">
+                        Mesleki Almanca, fikir beyan etme, yan cümleler ve ileri seviye dilbilgisi kuralları.
+                    </p>
+                </div>
+                
+                <div class="w-full py-4 bg-slate-900 border border-slate-800 text-slate-500 font-bold text-sm text-center rounded-xl flex items-center justify-center gap-2">
+                    Sonraki Hedef
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

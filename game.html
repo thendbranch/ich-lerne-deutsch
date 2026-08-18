@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Almanca Yarışma Arenası - Oyun</title>
+
+    <meta name="theme-color" content="#080d1a">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #080d1a; color: #f1f5f9; }
+        .game-card { background-color: #0f172a; border-color: #1e293b; }
+        .option-btn { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .option-btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(245, 158, 11, 0.2); }
+        .player-chip { transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-amber-500 selection:text-white relative overflow-x-hidden">
+
+    <!-- ARKA PLAN IŞIKLARI -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-amber-600/10 blur-[140px] rounded-full pointer-events-none z-0"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-orange-600/10 blur-[140px] rounded-full pointer-events-none z-0"></div>
+
+    <!-- ÜST NAVİGASYON -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-4">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <button onclick="window.location.href='anasayfa.html'" class="flex items-center gap-2 text-slate-400 hover:text-white font-semibold transition-all group">
+                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </div>
+                <span>Karargaha Dön</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-trophy"></i> Çok Oyunculu Arena
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ANA İÇERİK -->
+    <main class="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-8 flex flex-col justify-center relative z-10">
+
+        <!-- 1. ADIM: KİŞİ SAYISI VE İSİM GİRME EKRANI -->
+        <div id="setup-screen" class="game-card border rounded-[2.5rem] p-6 sm:p-10 shadow-2xl space-y-8 relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-amber-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+
+            <div class="text-center space-y-3">
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-amber-400 to-orange-600 text-white flex items-center justify-center text-3xl shadow-lg shadow-amber-500/30 mb-2">
+                    🎮
+                </div>
+                <h1 class="text-3xl font-black text-white">Almanca Düellosu</h1>
+                <p class="text-slate-400 text-sm max-w-md mx-auto">
+                    Arkadaşlarını topla! Kaç kişi yarışacaksınız? Oyuncu sayısını seçin ve isimleri girin.
+                </p>
+            </div>
+
+            <!-- Kişi Sayısı Seçimi -->
+            <div class="space-y-3">
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Kaç Oyuncu Katılacak?</label>
+                <div class="flex justify-center gap-3" id="player-count-buttons">
+                    <button onclick="setPlayerCount(2)" class="count-btn px-6 py-3 rounded-2xl font-bold bg-slate-900 border border-slate-700 text-white hover:border-amber-500 transition-all">2 Kişi</button>
+                    <button onclick="setPlayerCount(3)" class="count-btn px-6 py-3 rounded-2xl font-bold bg-slate-900 border border-slate-700 text-white hover:border-amber-500 transition-all">3 Kişi</button>
+                    <button onclick="setPlayerCount(4)" class="count-btn px-6 py-3 rounded-2xl font-bold bg-amber-500 border border-amber-400 text-slate-950 shadow-lg shadow-amber-500/20 transition-all">4 Kişi</button>
+                    <button onclick="setPlayerCount(5)" class="count-btn px-6 py-3 rounded-2xl font-bold bg-slate-900 border border-slate-700 text-white hover:border-amber-500 transition-all">5 Kişi</button>
+                    <button onclick="setPlayerCount(6)" class="count-btn px-6 py-3 rounded-2xl font-bold bg-slate-900 border border-slate-700 text-white hover:border-amber-500 transition-all">6 Kişi</button>
+                </div>
+            </div>
+
+            <!-- Kullanıcı Adı Giriş Alanları -->
+            <div id="name-inputs-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <!-- Javascript ile doldurulacak -->
+            </div>
+
+            <button onclick="startGame()" class="w-full py-5 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-black text-lg rounded-2xl shadow-xl shadow-amber-500/20 transition-all hover:scale-[1.01] active:scale-[0.99]">
+                Arenayı Başlat <i class="fa-solid fa-play ml-2"></i>
+            </button>
+        </div>
+
+        <!-- 2. ADIM: OYUN EKRANI (Gizli Başlar) -->
+        <div id="game-screen" class="hidden space-y-6">
+            
+            <!-- CANLI SKORBOARD (Yukarıda) -->
+            <div id="scoreboard" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <!-- Dinamik Oyuncu Çipleri -->
+            </div>
+
+            <!-- SORU KARTI -->
+            <div class="game-card border border-amber-500/30 rounded-[2.5rem] shadow-2xl p-6 sm:p-10 space-y-8 relative overflow-hidden">
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-amber-500/5 blur-[80px] rounded-full pointer-events-none"></div>
+
+                <!-- Sıradaki Oyuncu Bilgisi & İlerleme -->
+                <div class="flex justify-between items-center text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-slate-800 pb-4">
+                    <span id="turn-indicator" class="text-amber-400 text-sm font-black flex items-center gap-2">
+                        <i class="fa-solid fa-user-pen"></i> Sıradaki: Barış
+                    </span>
+                    <span id="game-progress" class="text-slate-400">Soru 1 / 40</span>
+                </div>
+
+                <!-- Soru Alanı -->
+                <div class="bg-slate-950/80 border border-slate-800 rounded-3xl p-8 sm:p-10 text-center space-y-3 shadow-inner">
+                    <span id="q-category" class="text-xs font-bold uppercase tracking-widest text-amber-500">Kategori</span>
+                    <div id="q-text" class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                        Soru yükleniyor...
+                    </div>
+                </div>
+
+                <!-- Şıklar -->
+                <div id="game-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
+                    <!-- Dinamik Şıklar -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. ADIM: OYUN BİTTİ / ŞAMPİYONLUK EKRANI (Gizli Başlar) -->
+        <div id="result-screen" class="hidden game-card border border-amber-500/40 rounded-[2.5rem] p-8 sm:p-12 text-center space-y-8 shadow-2xl relative overflow-hidden">
+            <div class="w-24 h-24 mx-auto rounded-[2rem] bg-gradient-to-br from-amber-300 to-orange-500 text-slate-950 flex items-center justify-center text-5xl shadow-lg shadow-amber-500/40 mb-2">
+                👑
+            </div>
+            
+            <div class="space-y-3">
+                <h2 class="text-3xl sm:text-4xl font-black text-white">Arena Sona Erdi!</h2>
+                <p id="champion-text" class="text-amber-400 font-bold text-xl">Şampiyon: Barış 🏆</p>
+            </div>
+
+            <!-- Final Sıralaması -->
+            <div id="final-scoreboard" class="max-w-md mx-auto space-y-2 text-left">
+                <!-- Skorlar listelenecek -->
+            </div>
+
+            <div class="flex gap-4 pt-4">
+                <button onclick="resetGame()" class="flex-1 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold rounded-2xl transition-all">
+                    Yeniden Oyna
+                </button>
+                <button onclick="window.location.href='anasayfa.html'" class="flex-1 py-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold rounded-2xl shadow-xl transition-all">
+                    Karargaha Dön
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+
+    <!-- OYUN MOTORU (JAVASCRIPT) -->
+    <script>
+        let playerCount = 4;
+        let players = []; // { name: '', score: 0 }
+        let currentTurn = 0;
+        let currentQuestionIndex = 0;
+        let questions = [];
+        let canAnswer = true;
+
+        // Öntanımlı Örnek İsimler
+        const DEFAULT_NAMES = ["Barış", "Burçak", "Nehir", "İsmail", "Can", "Zeynep"];
+
+        // --- SORU HAVUZU ÜRETİCİSİ (Sayılar, Zamirler, Fiiller) ---
+        const ZAHLE_POOL = [
+            { q: "Almancada '5' sayısı nedir?", a: "fünf", w: ["vier", "sechs", "zehn"] },
+            { q: "Almancada '12' sayısı nedir?", a: "zwölf", w: ["elf", "zwei", "dreizehn"] },
+            { q: "Almancada '20' sayısı nedir?", a: "zwanzig", w: ["zehn", "dreißig", "vierzig"] },
+            { q: "Almanca '24' nasıl okunur? (vierundzwanzig)", a: "24", w: ["42", "204", "14"] },
+            { q: "Almancada '100' sayısı nedir?", a: "hundert", w: ["tausend", "null", "elf"] }
+        ];
+
+        const PRONOUN_POOL = [
+            { q: "'Ben' öznesinin Almancası nedir?", a: "ich", w: ["du", "er", "wir"] },
+            { q: "'Sen' öznesinin Almancası nedir?", a: "du", w: ["sie", "ihr", "es"] },
+            { q: "Almancada resmi 'Siz' (Nezaket) zamiri hangisidir?", a: "Sie (Büyük harf)", w: ["sie (küçük)", "ihr", "wir"] },
+            { q: "'Biz' öznesinin Almancası nedir?", a: "wir", w: ["ihr", "sie", "er"] },
+            { q: "Almancada kaç tane 'sie' vardır?", a: "3 tane", w: ["1 tane", "2 tane", "Hiç yok"] }
+        ];
+
+        const VERB_POOL = [
+            { q: "'lernen' (öğrenmek) fiilinin kökü nedir?", a: "lern", w: ["lernen", "ler", "ne"] },
+            { q: "'ich' (ben) öznesiyle 'lernen' fiili nasıl çekimlenir?", a: "lerne", w: ["lernst", "lernt", "lernen"] },
+            { q: "'du' (sen) öznesiyle 'lernen' fiili nasıl çekimlenir?", a: "lernst", w: ["lerne", "lernt", "lernen"] },
+            { q: "'kommen' (gelmek) fiilinin 'wir' (biz) ile çekimi nedir?", a: "kommen", w: ["komme", "kommst", "kommt"] },
+            { q: "Almancada düzenli fiiller sözlükte hangi ekle biter?", a: "-en veya -n", w: ["-er", "-st", "-t"] }
+        ];
+
+        // Sayfa Yüklendiğinde Inputları Oluştur
+        window.addEventListener('DOMContentLoaded', () => {
+            setPlayerCount(4);
+        });
+
+        function setPlayerCount(count) {
+            playerCount = count;
+            
+            // Buton stillerini güncelle
+            document.querySelectorAll('.count-btn').forEach((btn, index) => {
+                if ((index + 2) === count) {
+                    btn.className = "count-btn px-6 py-3 rounded-2xl font-bold bg-amber-500 border border-amber-400 text-slate-950 shadow-lg shadow-amber-500/20 transition-all";
+                } else {
+                    btn.className = "count-btn px-6 py-3 rounded-2xl font-bold bg-slate-900 border border-slate-700 text-white hover:border-amber-500 transition-all";
+                }
+            });
+
+            // İsim inputlarını oluştur
+            const container = document.getElementById('name-inputs-container');
+            container.innerHTML = '';
+            for (let i = 0; i < count; i++) {
+                container.innerHTML += `
+                    <div class="space-y-1">
+                        <label class="block text-xs font-semibold text-slate-400 ml-1">Oyuncu ${i + 1}</label>
+                        <input type="text" id="player-name-${i}" value="${DEFAULT_NAMES[i] || 'Oyuncu ' + (i+1)}" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 focus:border-amber-500 rounded-xl text-white font-bold outline-none transition-all">
+                    </div>
+                `;
+            }
+        }
+
+        function shuffleArray(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function startGame() {
+            players = [];
+            for (let i = 0; i < playerCount; i++) {
+                let nameInput = document.getElementById(`player-name-${i}`).value.trim();
+                players.push({ name: nameInput || `Oyuncu ${i+1}`, score: 0 });
+            }
+
+            // Toplam soru sayısı: Oyuncu sayısı x 10
+            let totalQuestionsNeeded = playerCount * 10;
+            let combinedPool = [...ZAHLE_POOL, ...PRONOUN_POOL, ...VERB_POOL];
+            
+            // Havuzu çoğaltıp karıştırıyoruz ki soru yetersiz kalmasın
+            questions = [];
+            while(questions.length < totalQuestionsNeeded) {
+                let shuffled = shuffleArray(combinedPool);
+                questions.push(...shuffled);
+            }
+            questions = questions.slice(0, totalQuestionsNeeded);
+
+            currentTurn = 0;
+            currentQuestionIndex = 0;
+
+            // Ekran değiştir
+            document.getElementById('setup-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.remove('hidden');
+
+            renderScoreboard();
+            renderQuestion();
+        }
+
+        function renderScoreboard() {
+            const scoreboard = document.getElementById('scoreboard');
+            scoreboard.innerHTML = '';
+            players.forEach((p, idx) => {
+                let isCurrent = (idx === currentTurn);
+                scoreboard.innerHTML += `
+                    <div class="player-chip p-3 rounded-2xl border ${isCurrent ? 'bg-amber-500/20 border-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.2)]' : 'bg-slate-900/80 border-slate-800'} flex flex-col items-center text-center">
+                        <span class="text-xs font-bold text-slate-400 truncate max-w-full">${p.name}</span>
+                        <span class="text-2xl font-black ${isCurrent ? 'text-amber-400' : 'text-white'}">${p.score}</span>
+                    </div>
+                `;
+            });
+        }
+
+        function renderQuestion() {
+            canAnswer = true;
+            let q = questions[currentQuestionIndex];
+            let activePlayer = players[currentTurn];
+
+            document.getElementById('turn-indicator.innerHTML') // güvenli atama
+            document.getElementById('turn-indicator').innerHTML = `<i class="fa-solid fa-user-pen mr-1"></i> Sıradaki Oyuncu: <span class="text-white underline">${activePlayer.name}</span>`;
+            document.getElementById('game-progress').innerText = `Soru ${currentQuestionIndex + 1} / ${questions.length}`;
+
+            // Kategori tespiti
+            let cat = "Genel Dilbilgisi";
+            if(ZAHLE_POOL.includes(q)) cat = "Sayılar (Zahlen)";
+            else if(PRONOUN_POOL.includes(q)) cat = "Kişi Zamirleri";
+            else if(VERB_POOL.includes(q)) cat = "Fiil Çekimleri";
+
+            document.getElementById('q-category').innerText = cat;
+            document.getElementById('q-text').innerText = q.q;
+
+            // Şıkları hazırla
+            let options = [q.a, ...q.w];
+            let shuffledOptions = shuffleArray(options);
+
+            const optionsContainer = document.getElementById('game-options');
+            optionsContainer.innerHTML = '';
+
+            shuffledOptions.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn p-5 bg-slate-900 border border-slate-700 hover:border-amber-500 rounded-2xl text-white font-bold text-lg text-center shadow-md';
+                btn.innerText = opt;
+                btn.onclick = () => handleAnswer(opt, q.a, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function handleAnswer(selected, correct, btnElement) {
+            if (!canAnswer) return;
+            canAnswer = false;
+
+            const allButtons = document.querySelectorAll('.option-btn');
+
+            if (selected === correct) {
+                players[currentTurn].score += 10;
+                btnElement.className = 'option-btn p-5 bg-emerald-600 border border-emerald-500 rounded-2xl text-white font-bold text-lg text-center shadow-[0_0_15px_rgba(16,185,129,0.4)]';
+            } else {
+                players[currentTurn].score -= 5; // Yanlış cevap cezası
+                btnElement.className = 'option-btn p-5 bg-rose-600 border border-rose-500 rounded-2xl text-white font-bold text-lg text-center';
+                
+                // Doğru şıkkı göster
+                allButtons.forEach(b => {
+                    if (b.innerText === correct) {
+                        b.className = 'option-btn p-5 bg-emerald-600/70 border border-emerald-500 rounded-2xl text-white font-bold text-lg text-center';
+                    }
+                });
+            }
+
+            allButtons.forEach(b => b.disabled = true);
+
+            setTimeout(() => {
+                currentQuestionIndex++;
+                currentTurn = (currentTurn + 1) % playerCount; // Sıradaki oyuncuya geç
+
+                if (currentQuestionIndex < questions.length) {
+                    renderScoreboard();
+                    renderQuestion();
+                } else {
+                    endGame();
+                }
+            }, 1200);
+        }
+
+        function endGame() {
+            document.getElementById('game-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+
+            // Sıralama yap (Puana göre büyükten küçüğe)
+            let sortedPlayers = [...players].sort((a, b) => b.score - a.score);
+            let champion = sortedPlayers[0];
+
+            document.getElementById('champion-text').innerText = `👑 Şampiyon: ${champion.name} (${champion.score} Puan)!`;
+
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 200, spread: 100, origin: { y: 0.5 }, colors: ['#f59e0b', '#ea580c', '#38bdf8'] });
+            }
+
+            const finalScoreboard = document.getElementById('final-scoreboard');
+            finalScoreboard.innerHTML = '';
+            sortedPlayers.forEach((p, idx) => {
+                let badge = idx === 0 ? '🥇' : (idx === 1 ? '🥈' : (idx === 2 ? '🥉' : '🎮'));
+                finalScoreboard.innerHTML += `
+                    <div class="flex justify-between items-center p-4 bg-slate-900 border border-slate-800 rounded-xl">
+                        <span class="font-bold text-white">${badge} ${idx + 1}. ${p.name}</span>
+                        <span class="font-black text-amber-400 text-lg">${p.score} Puan</span>
+                    </div>
+                `;
+            });
+        }
+
+        function resetGame() {
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('setup-screen').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

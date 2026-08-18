@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kişi Zamirleri - Almanca Dünyası</title>
+
+    <meta name="theme-color" content="#080d1a">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #080d1a; color: #f1f5f9; }
+        .dashboard-card { background-color: #0f172a; border-color: #1e293b; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
+
+    <!-- ÜST NAVİGASYON -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Yönlendirme konu_anlatimi.html olarak güncellendi -->
+            <button onclick="window.location.href='konu_anlatimi.html'" class="flex items-center gap-2 text-slate-400 hover:text-white font-semibold transition-all group">
+                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-slate-700">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </div>
+                <span>Teori Merkezine Dön</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-bold uppercase tracking-wider">
+                    A1 Gramer
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ANA İÇERİK (DASHBOARD) -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-8 space-y-8 pb-20">
+
+        <!-- Başlık Kartı -->
+        <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-[2rem] p-6 sm:p-10 flex flex-col md:flex-row items-center gap-8 shadow-xl relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-emerald-500/10 blur-[80px] rounded-full"></div>
+            
+            <div class="w-24 h-24 rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-5xl shadow-lg shadow-emerald-500/20 shrink-0 z-10">
+                👥
+            </div>
+            <div class="z-10 text-center md:text-left">
+                <h1 class="text-3xl sm:text-4xl font-black text-white mb-3 tracking-tight">Kişi Zamirleri <span class="text-slate-400 font-medium">(Personalpronomen)</span></h1>
+                <p class="text-slate-400 text-sm sm:text-base max-w-2xl leading-relaxed">
+                    Almancada cümlelerin kahramanları kimlerdir? Bu bölümde yalnızca eylemi yapan temel özneleri (Yalın Hal - Nominativ) öğreniyoruz.
+                </p>
+            </div>
+        </div>
+
+        <!-- DASHBOARD GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- 1. TEKİL ŞAHISLAR -->
+            <div class="dashboard-card border rounded-3xl p-6 sm:p-8 shadow-lg hover:border-emerald-500/30 transition-all">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">1. Tekil Şahıslar (Singular)</h2>
+                </div>
+                
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <div class="flex items-center gap-4">
+                            <span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400">1</span>
+                            <span class="font-black text-white text-lg">ich</span>
+                        </div>
+                        <span class="text-slate-400 font-medium">Ben</span>
+                    </div>
+
+                    <div class="flex justify-between items-center p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <div class="flex items-center gap-4">
+                            <span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400">2</span>
+                            <span class="font-black text-white text-lg">du</span>
+                        </div>
+                        <span class="text-slate-400 font-medium">Sen</span>
+                    </div>
+
+                    <div class="p-4 bg-slate-900/50 rounded-xl border border-slate-800 space-y-3">
+                        <div class="flex items-center gap-4 mb-2">
+                            <span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400">3</span>
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Almancada 3 Farklı "O" Vardır:</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center p-3 bg-slate-950 rounded-lg border border-slate-800/50">
+                            <div class="font-black text-sky-400 text-lg">er</div>
+                            <span class="text-slate-400 text-sm">O <span class="text-xs opacity-70">(Erkek / der)</span></span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-950 rounded-lg border border-slate-800/50">
+                            <div class="font-black text-rose-400 text-lg">sie</div>
+                            <span class="text-slate-400 text-sm">O <span class="text-xs opacity-70">(Kadın / die)</span></span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-950 rounded-lg border border-slate-800/50">
+                            <div class="font-black text-amber-400 text-lg">es</div>
+                            <span class="text-slate-400 text-sm">O <span class="text-xs opacity-70">(Nötr / das)</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. ÇOĞUL ŞAHISLAR -->
+            <div class="dashboard-card border rounded-3xl p-6 sm:p-8 shadow-lg hover:border-amber-500/30 transition-all flex flex-col">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">2. Çoğul Şahıslar (Plural)</h2>
+                </div>
+
+                <div class="space-y-3 flex-1 content-start">
+                    <div class="flex justify-between items-center p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <div class="flex items-center gap-4">
+                            <span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400">1</span>
+                            <span class="font-black text-white text-lg">wir</span>
+                        </div>
+                        <span class="text-slate-400 font-medium">Biz</span>
+                    </div>
+
+                    <div class="flex justify-between items-center p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <div class="flex items-center gap-4">
+                            <span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400">2</span>
+                            <span class="font-black text-white text-lg">ihr</span>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-slate-400 font-medium">Siz</div>
+                            <div class="text-[10px] text-amber-400">Samimi (Çocuklar, arkadaşlar vb.)</div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <div class="flex items-center gap-4">
+                            <span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-xs font-bold text-slate-400">3</span>
+                            <span class="font-black text-white text-lg">sie</span>
+                        </div>
+                        <span class="text-slate-400 font-medium">Onlar</span>
+                    </div>
+
+                    <div class="flex justify-between items-center p-4 bg-slate-800 rounded-xl border border-slate-700 relative overflow-hidden">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-amber-500"></div>
+                        <div class="flex items-center gap-4 pl-2">
+                            <span class="font-black text-white text-lg">Sie</span>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-white font-bold">Siz <span class="text-xs font-normal text-amber-400 ml-1">(Resmi / Nezaket)</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. ALMANCANIN EN BÜYÜK TUZAĞI (TAM GENİŞLİK) -->
+            <div class="dashboard-card border border-rose-500/30 rounded-3xl p-6 sm:p-8 shadow-lg lg:col-span-2 relative overflow-hidden bg-gradient-to-r from-slate-900 to-rose-950/20">
+                <div class="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
+                    <div class="w-16 h-16 rounded-2xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-3xl shrink-0">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-rose-400 mb-2">Dikkat: 3 Farklı "Sie" Tuzağı</h3>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                            Almancada tam 3 tane "sie" kelimesi vardır. Bunları birbirinden ayırmanın tek yolu cümlenin anlamına ve fiilin çekimine bakmaktır.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                                <div class="font-black text-white text-xl mb-1">sie <span class="text-xs text-slate-500 font-normal ml-1">(O)</span></div>
+                                <p class="text-xs text-rose-300 mb-2">Tekil Kadın</p>
+                                <div class="text-xs text-slate-400 bg-slate-900 p-2 rounded border border-slate-800">
+                                    <i>Örn: <b class="text-white">sie</b> lernt. (O öğreniyor.)</i>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-slate-950 border border-slate-800 rounded-xl p-4">
+                                <div class="font-black text-white text-xl mb-1">sie <span class="text-xs text-slate-500 font-normal ml-1">(Onlar)</span></div>
+                                <p class="text-xs text-rose-300 mb-2">Çoğul Şahıs</p>
+                                <div class="text-xs text-slate-400 bg-slate-900 p-2 rounded border border-slate-800">
+                                    <i>Örn: <b class="text-white">sie</b> lernen. (Onlar öğreniyor.)</i>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-950 border border-rose-500/40 rounded-xl p-4 relative">
+                                <div class="absolute -top-2 -right-2 bg-rose-500 text-white text-[10px] font-bold px-2 py-1 rounded-lg">Büyük Harf!</div>
+                                <div class="font-black text-white text-xl mb-1">Sie <span class="text-xs text-slate-500 font-normal ml-1">(Siz)</span></div>
+                                <p class="text-xs text-rose-300 mb-2">Resmi / Nezaket</p>
+                                <div class="text-xs text-slate-400 bg-slate-900 p-2 rounded border border-slate-800">
+                                    <i>Örn: Was machen <b class="text-white">Sie</b>?</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. SONRAKİ DERS FRAGMANI (SPOILER) -->
+            <div class="dashboard-card border border-sky-500/30 rounded-3xl p-6 sm:p-8 shadow-lg bg-gradient-to-br from-slate-900 to-sky-950/20">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-forward-step"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold text-white">Sonraki Derse Hazırlık</h2>
+                        <p class="text-xs text-sky-400">Fiiller bu zamirlere göre nasıl değişir?</p>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-400 mb-5">
+                    Özneleri tanıdığımıza göre artık cümle kurmaya hazırız! Bir sonraki derste fiillerin sonuna gelen takıları öğreneceğiz. Ufak bir ipucu:
+                </p>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 text-center">
+                        <div class="text-slate-500 text-sm font-semibold mb-1">ich (ben)</div>
+                        <div class="text-xl font-bold text-white">lern<span class="text-sky-400">e</span></div>
+                    </div>
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 text-center">
+                        <div class="text-slate-500 text-sm font-semibold mb-1">du (sen)</div>
+                        <div class="text-xl font-bold text-white">lern<span class="text-sky-400">st</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. KİLİTLİ ALAN (İLERİ SEVİYE ZAMİRLER - Akkusativ/Dativ) -->
+            <div class="dashboard-card border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-lg relative overflow-hidden flex flex-col justify-center items-center text-center opacity-80">
+                <!-- Kilit Overlay -->
+                <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm z-10 flex flex-col items-center justify-center p-6 space-y-3">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-800 text-slate-400 flex items-center justify-center text-2xl font-bold shadow-inner border border-slate-700">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h4 class="font-black text-white text-lg">İleri Seviye Zamirler</h4>
+                    <p class="text-xs text-slate-300 max-w-xs leading-relaxed">
+                        <span class="text-amber-400 font-bold">mich (beni), mir (bana)</span> gibi gelişmiş zamirler, fiil çekimleri konusu tamamlandıktan sonra açılacaktır. Adım adım ilerliyoruz!
+                    </p>
+                </div>
+                
+                <!-- Arka Planda Silik Görünen İçerik -->
+                <div class="w-full space-y-3 opacity-20 pointer-events-none filter blur-[2px]">
+                    <div class="h-12 bg-slate-800 rounded-xl w-full"></div>
+                    <div class="h-12 bg-slate-800 rounded-xl w-full"></div>
+                    <div class="h-12 bg-slate-800 rounded-xl w-full"></div>
+                </div>
+            </div>
+
+            <!-- PRATİK YÖNLENDİRMESİ (YENİ EKLENEN CTA) -->
+            <div class="dashboard-card border border-emerald-500/50 rounded-3xl p-6 sm:p-8 shadow-lg lg:col-span-2 relative overflow-hidden bg-gradient-to-r from-emerald-900/40 to-teal-900/20 text-center flex flex-col items-center justify-center space-y-4">
+                <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl shadow-inner mb-2">
+                    <i class="fa-solid fa-dumbbell"></i>
+                </div>
+                <h3 class="text-2xl font-black text-white">Kuralları Öğrendin mi?</h3>
+                <p class="text-sm text-slate-300 max-w-md">
+                    Zamirleri sadece okuyarak değil, kullanarak öğrenirsin. 4 aşamalı refleks testine girip kas hafızanı güçlendir.
+                </p>
+                <button onclick="window.location.href='alistirma_zamirler.html'" class="px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-lg rounded-2xl shadow-xl shadow-emerald-500/20 transition-all hover:-translate-y-1 mt-4">
+                    Zamirler Kampına Git <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

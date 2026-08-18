@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fiil Çekim Motoru - Barış'ın Almanca Dünyası</title>
+
+    <meta name="theme-color" content="#080d1a">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #080d1a; color: #f1f5f9; }
+        .trainer-card { background-color: #0f172a; border-color: #1e293b; }
+        .option-btn { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .option-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2); }
+        .option-btn:active:not(:disabled) { transform: translateY(0); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-violet-500 selection:text-white relative">
+
+    <!-- ÜST NAVİGASYON -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-4">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <button onclick="window.location.href='alistirmalar.html'" class="flex items-center gap-2 text-slate-400 hover:text-white font-semibold transition-all group">
+                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </div>
+                <span>Pratik Merkezine Dön</span>
+            </button>
+            <div class="flex items-center gap-3">
+                <button onclick="showStageSelection()" title="Aşama Seçimine Dön" class="px-3 py-1.5 rounded-xl bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 text-xs font-bold transition-all flex items-center gap-1.5 border border-slate-700">
+                    <i class="fa-solid fa-layer-group"></i> Aşamalar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ANA İÇERİK -->
+    <main class="flex-1 max-w-2xl w-full mx-auto p-4 sm:p-8 space-y-6 flex flex-col justify-center">
+
+        <!-- BAŞLIK -->
+        <div class="text-center space-y-2 mb-2">
+            <h1 class="text-2xl sm:text-3xl font-black text-white">Fiil Çekim Motoru (Grup 1)</h1>
+            <p class="text-sm text-slate-400 font-medium">Kökü kes, takıyı giydir ve makineyi çalıştır!</p>
+        </div>
+
+        <!-- AŞAMA SEÇİM EKRANI -->
+        <div id="stage-selection" class="grid grid-cols-1 sm:grid-cols-2 gap-4 transition-all duration-500">
+            <!-- Aşama 1 -->
+            <button onclick="startStage(1)" class="trainer-card border rounded-[2rem] p-6 text-left hover:border-violet-500/50 transition-all group">
+                <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-scissors"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-1">1. Makas Ustası</h3>
+                <p class="text-xs text-slate-400">Fiilin "kuyruğunu" kesip saf fiil kökünü bulma refleksi. (15 Soru)</p>
+            </button>
+
+            <!-- Aşama 2 -->
+            <button onclick="startStage(2)" class="trainer-card border rounded-[2rem] p-6 text-left hover:border-violet-500/50 transition-all group">
+                <div class="w-12 h-12 rounded-2xl bg-fuchsia-500/10 text-fuchsia-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-1">2. Takı Makinesi</h3>
+                <p class="text-xs text-slate-400">Bulunan köke, özneye göre (-e, -st, -t, -en) doğru takıyı ekle. (20 Soru)</p>
+            </button>
+
+            <!-- Aşama 3 -->
+            <button onclick="startStage(3)" class="trainer-card border rounded-[2rem] p-6 text-left hover:border-violet-500/50 transition-all group">
+                <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-1">3. Cümle Mühendisi</h3>
+                <p class="text-xs text-slate-400">Fiil çekimlerini gerçek cümle yapıları içinde boşluk doldurarak test et. (15 Soru)</p>
+            </button>
+
+            <!-- Aşama 4 -->
+            <button onclick="startStage(4)" class="trainer-card border border-violet-500/30 rounded-[2rem] p-6 text-left hover:border-violet-500 transition-all group bg-gradient-to-br from-slate-900 to-violet-950/20 shadow-[0_0_15px_rgba(139,92,246,0.1)]">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-400 to-purple-600 text-white flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-violet-500/30">
+                    <i class="fa-solid fa-gears"></i>
+                </div>
+                <h3 class="text-lg font-bold text-violet-400 mb-1">4. Usta Makinist</h3>
+                <p class="text-xs text-slate-300">Özneler ve fiillerin karışık aktığı, reflekslerini test eden dev final! (30 Soru)</p>
+            </button>
+        </div>
+
+        <!-- OYUN KARTI (Gizli başlar) -->
+        <div id="quiz-card" class="hidden trainer-card border border-violet-500/30 rounded-[2rem] shadow-2xl p-6 sm:p-8 space-y-6 relative overflow-hidden transition-all duration-500">
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-violet-500/5 blur-[80px] rounded-full pointer-events-none"></div>
+
+            <div class="space-y-2 relative z-10">
+                <div class="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-wider">
+                    <span id="current-stage-title">Aşama 1</span>
+                    <span id="quiz-progress-text" class="text-violet-400">1 / 20</span>
+                </div>
+                <div class="w-full h-3 bg-slate-900 rounded-full overflow-hidden border border-slate-800">
+                    <div id="quiz-progress-bar" class="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 transition-all duration-300 shadow-[0_0_10px_rgba(139,92,246,0.5)]" style="width: 5%;"></div>
+                </div>
+            </div>
+
+            <div class="bg-slate-950/80 border border-slate-800 rounded-3xl p-6 sm:p-10 text-center space-y-3 shadow-inner min-h-[160px] flex flex-col justify-center relative">
+                <span id="question-type-badge" class="text-xs font-bold uppercase tracking-widest text-violet-400 mb-2 block">Soru Tipi</span>
+                <div id="question-text" class="text-3xl sm:text-4xl font-black text-white leading-tight tracking-wide">Yükleniyor...</div>
+                <p id="question-hint" class="text-sm text-slate-400 font-medium mt-3 hidden">İpucu</p>
+            </div>
+
+            <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3 relative z-10">
+                <!-- Şıklar -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SONUÇ MODALI -->
+    <div id="result-modal" class="fixed inset-0 z-50 hidden bg-slate-950/95 backdrop-blur-md p-6 flex flex-col items-center justify-center transition-opacity">
+        <div class="max-w-md w-full bg-gradient-to-b from-slate-900 to-slate-950 border border-violet-500/40 rounded-[2.5rem] p-8 sm:p-10 text-center space-y-6 shadow-[0_0_50px_rgba(139,92,246,0.15)] relative overflow-hidden" id="modal-content-box">
+            <div id="result-icon" class="w-24 h-24 mx-auto rounded-[2rem] bg-gradient-to-br from-violet-400 to-fuchsia-500 text-white flex items-center justify-center text-5xl shadow-lg shadow-violet-500/30 mb-2">
+                🎯
+            </div>
+            <div class="space-y-3 relative z-10">
+                <h3 id="result-title" class="text-3xl font-black text-white">Aşama Bitti!</h3>
+                <p id="result-desc" class="text-slate-400 text-sm sm:text-base leading-relaxed">Sonucunuz yükleniyor...</p>
+                <div class="text-4xl font-black text-violet-400 py-4" id="result-score">20 / 20</div>
+            </div>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <button onclick="window.location.href='alistirmalar.html'" class="w-full py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold text-sm rounded-2xl transition-all">
+                    Pratik Merkezi
+                </button>
+                <button id="btn-next-action" class="w-full py-4 bg-white hover:bg-slate-200 text-slate-950 font-extrabold text-sm rounded-2xl shadow-xl transition-all">
+                    Devam Et <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // --- DİNAMİK SORU ÜRETİCİ VERİTABANI ---
+        const VERBS = [
+            { v: 'lernen', r: 'lern', tr: 'öğrenmek' },
+            { v: 'machen', r: 'mach', tr: 'yapmak' },
+            { v: 'spielen', r: 'spiel', tr: 'oynamak' },
+            { v: 'hören', r: 'hör', tr: 'dinlemek' },
+            { v: 'kaufen', r: 'kauf', tr: 'satın almak' },
+            { v: 'fragen', r: 'frag', tr: 'sormak' },
+            { v: 'sagen', r: 'sag', tr: 'söylemek' },
+            { v: 'wohnen', r: 'wohn', tr: 'ikamet etmek' },
+            { v: 'kommen', r: 'komm', tr: 'gelmek' },
+            { v: 'trinken', r: 'trink', tr: 'içmek' },
+            { v: 'kochen', r: 'koch', tr: 'pişirmek' },
+            { v: 'lieben', r: 'lieb', tr: 'sevmek' },
+            { v: 'suchen', r: 'such', tr: 'aramak' },
+            { v: 'brauchen', r: 'brauch', tr: 'ihtiyacı olmak' },
+            { v: 'gehen', r: 'geh', tr: 'gitmek' }
+        ];
+
+        const PRONOUNS = [
+            { p: 'ich', e: 'e', hint: 'Ben' },
+            { p: 'du', e: 'st', hint: 'Sen' },
+            { p: 'er', e: 't', hint: 'O (Erkek)' },
+            { p: 'sie', e: 't', hint: 'O (Kadın)' },
+            { p: 'wir', e: 'en', hint: 'Biz' },
+            { p: 'ihr', e: 't', hint: 'Siz (Samimi)' },
+            { p: 'Sie', e: 'en', hint: 'Siz (Resmi)' }
+        ];
+
+        const SENTENCES = [
+            { q: 'Ich ____ Deutsch.', a: 'lerne', w: ['lernst', 'lernt', 'lernen'], hint: 'lernen (öğrenmek)' },
+            { q: 'Wir ____ Fußball.', a: 'spielen', w: ['spiele', 'spielst', 'spielt'], hint: 'spielen (oynamak)' },
+            { q: 'Was ____ du?', a: 'machst', w: ['mache', 'macht', 'machen'], hint: 'machen (yapmak)' },
+            { q: 'Er ____ in Berlin.', a: 'wohnt', w: ['wohne', 'wohnst', 'wohnen'], hint: 'wohnen (ikamet etmek)' },
+            { q: '____ ihr Musik?', a: 'Hört', w: ['Höre', 'Hörst', 'Hören'], hint: 'hören (dinlemek)' },
+            { q: 'Sie (Kadın) ____ ein Auto.', a: 'kauft', w: ['kaufe', 'kaufst', 'kaufen'], hint: 'kaufen (satın almak)' },
+            { q: 'Woher ____ Sie (Resmi)?', a: 'kommen', w: ['komme', 'kommst', 'kommt'], hint: 'kommen (gelmek)' },
+            { q: 'Ich ____ Wasser.', a: 'trinke', w: ['trinkst', 'trinkt', 'trinken'], hint: 'trinken (içmek)' },
+            { q: '____ du Pizza?', a: 'Kochst', w: ['Koche', 'Kocht', 'Kochen'], hint: 'kochen (pişirmek)' },
+            { q: 'Wir ____ dich.', a: 'lieben', w: ['liebe', 'liebst', 'liebt'], hint: 'lieben (sevmek)' },
+            { q: 'Was ____ er?', a: 'sagt', w: ['sage', 'sagst', 'sagen'], hint: 'sagen (söylemek)' },
+            { q: '____ ihr nach Hause?', a: 'Geht', w: ['Gehe', 'Gehst', 'Gehen'], hint: 'gehen (gitmek)' },
+            { q: 'Ich ____ einen Stift.', a: 'brauche', w: ['brauchst', 'braucht', 'brauchen'], hint: 'brauchen (ihtiyacı olmak)' },
+            { q: 'Sie (Onlar) ____ den Schlüssel.', a: 'suchen', w: ['suche', 'suchst', 'sucht'], hint: 'suchen (aramak)' },
+            { q: 'Warum ____ du?', a: 'fragst', w: ['frage', 'fragt', 'fragen'], hint: 'fragen (sormak)' }
+        ];
+
+        let currentQuestions = [];
+        let currentIndex = 0;
+        let score = 0;
+        let canAnswer = true;
+        let currentStageId = 1;
+
+        function shuffleArray(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function generateStage1(count) {
+            let questions = [];
+            for (let i = 0; i < count; i++) {
+                let verb = VERBS[Math.floor(Math.random() * VERBS.length)];
+                let wrongs = [verb.r + 'e', verb.r.slice(0, -1), verb.v];
+                questions.push({
+                    label: '✂️ Makas Ustası',
+                    q: `<span class="text-slate-400 text-xl font-normal block mb-1">Bu fiilin kökü nedir?</span><span class="text-fuchsia-400">${verb.v}</span>`,
+                    hint: `Anlamı: ${verb.tr}`,
+                    a: verb.r,
+                    w: wrongs
+                });
+            }
+            return questions;
+        }
+
+        function generateStage2(count) {
+            let questions = [];
+            for (let i = 0; i < count; i++) {
+                let verb = VERBS[Math.floor(Math.random() * VERBS.length)];
+                let pronoun = PRONOUNS[Math.floor(Math.random() * PRONOUNS.length)];
+                
+                let correctAnswer = `-${pronoun.e}`;
+                let allEndings = ['-e', '-st', '-t', '-en'];
+                let wrongs = allEndings.filter(e => e !== correctAnswer).slice(0, 3);
+
+                if (wrongs.length < 3) wrongs.push('-n');
+
+                questions.push({
+                    label: '🧩 Takı Makinesi',
+                    q: `<span class="text-sky-400">${pronoun.p}</span> ${verb.r}<span class="text-slate-500">___</span>`,
+                    hint: `Fiil: ${verb.v} (${verb.tr})`,
+                    a: correctAnswer,
+                    w: wrongs
+                });
+            }
+            return questions;
+        }
+
+        function showStageSelection() {
+            document.getElementById('result-modal').classList.add('hidden');
+            document.getElementById('quiz-card').classList.add('hidden');
+            document.getElementById('stage-selection').classList.remove('hidden');
+        }
+
+        function startStage(stage) {
+            currentStageId = stage;
+            document.getElementById('stage-selection').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+
+            let pool = [];
+
+            if (stage === 1) {
+                document.getElementById('current-stage-title').innerText = "Aşama 1: Makas Ustası";
+                pool = generateStage1(15);
+            } else if (stage === 2) {
+                document.getElementById('current-stage-title').innerText = "Aşama 2: Takı Makinesi";
+                pool = generateStage2(20);
+            } else if (stage === 3) {
+                document.getElementById('current-stage-title').innerText = "Aşama 3: Cümle Mühendisi";
+                pool = shuffleArray(SENTENCES).slice(0, 15);
+            } else if (stage === 4) {
+                document.getElementById('current-stage-title').innerText = "Aşama 4: Usta Makinist";
+                let part1 = generateStage1(5);
+                let part2 = generateStage2(15);
+                let part3 = shuffleArray(SENTENCES).slice(0, 10);
+                pool = shuffleArray([...part1, ...part2, ...part3]);
+            }
+
+            currentQuestions = pool;
+            currentIndex = 0;
+            score = 0;
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            canAnswer = true;
+            const qData = currentQuestions[currentIndex];
+            const total = currentQuestions.length;
+            const currentNum = currentIndex + 1;
+
+            document.getElementById('quiz-progress-text').innerText = `${currentNum} / ${total}`;
+            document.getElementById('quiz-progress-bar').style.width = `${(currentNum / total) * 100}%`;
+
+            document.getElementById('question-type-badge').innerText = qData.label || '⚙️ Karışık Motor';
+            document.getElementById('question-text').innerHTML = qData.q;
+            
+            const hintEl = document.getElementById('question-hint');
+            if (qData.hint) {
+                hintEl.innerText = qData.hint;
+                hintEl.classList.remove('hidden');
+            } else {
+                hintEl.classList.add('hidden');
+            }
+
+            let options = [qData.a, ...qData.w];
+            let shuffledOptions = shuffleArray(options);
+
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            
+            shuffledOptions.forEach((opt) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn w-full p-4 sm:p-6 bg-slate-900/80 border border-slate-700 rounded-2xl text-white font-bold text-xl sm:text-2xl shadow-sm tracking-wider';
+                btn.innerHTML = opt;
+                btn.onclick = () => handleAnswer(btn, opt, qData.a);
+                container.appendChild(btn);
+            });
+        }
+
+        function handleAnswer(btnElement, selectedAnswer, correctAnswer) {
+            if (!canAnswer) return;
+            canAnswer = false; 
+
+            const allButtons = document.querySelectorAll('.option-btn');
+            
+            if (selectedAnswer === correctAnswer) {
+                score++;
+                btnElement.classList.remove('bg-slate-900/80', 'border-slate-700');
+                btnElement.classList.add('bg-violet-600', 'border-violet-500', 'shadow-[0_0_20px_rgba(139,92,246,0.5)]');
+            } else {
+                btnElement.classList.remove('bg-slate-900/80', 'border-slate-700');
+                btnElement.classList.add('bg-rose-600', 'border-rose-500');
+                
+                allButtons.forEach(b => {
+                    if (b.innerHTML === correctAnswer) {
+                        b.classList.remove('bg-slate-900/80', 'border-slate-700');
+                        b.classList.add('bg-violet-600/50', 'border-violet-500', 'opacity-90');
+                    }
+                });
+            }
+
+            allButtons.forEach(b => b.disabled = true);
+
+            setTimeout(() => {
+                currentIndex++;
+                if (currentIndex < currentQuestions.length) {
+                    renderQuestion();
+                } else {
+                    finishStage();
+                }
+            }, 1000);
+        }
+
+        function finishStage() {
+            const modal = document.getElementById('result-modal');
+            const title = document.getElementById('result-title');
+            const desc = document.getElementById('result-desc');
+            const scoreDisplay = document.getElementById('result-score');
+            const icon = document.getElementById('result-icon');
+            const nextBtn = document.getElementById('btn-next-action');
+            
+            const total = currentQuestions.length;
+            const successRate = score / total;
+            scoreDisplay.innerText = `${score} / ${total}`;
+
+            if (successRate === 1) {
+                title.innerText = 'Kusursuz Makinist!';
+                desc.innerText = 'İnanılmaz! Makineyi hatasız çalıştırdın. Fiillerin mantığını tamamen çözmüşsün.';
+                icon.innerHTML = '👑';
+                icon.className = "w-24 h-24 mx-auto rounded-[2rem] bg-gradient-to-br from-yellow-300 to-amber-500 text-slate-900 flex items-center justify-center text-5xl shadow-lg shadow-amber-500/50 mb-2";
+                if (typeof confetti === 'function') confetti({ particleCount: 150, spread: 90, origin: { y: 0.5 }, colors: ['#8b5cf6', '#d946ef', '#fbbf24'] });
+            } else if (successRate >= 0.75) {
+                title.innerText = 'Çok İyi!';
+                desc.innerText = 'Çarklar harika dönüyor. Ufak tefek hataları kapatmak için bir kez daha çözebilirsin.';
+                icon.innerHTML = '👍';
+                icon.className = "w-24 h-24 mx-auto rounded-[2rem] bg-gradient-to-br from-violet-400 to-fuchsia-500 text-white flex items-center justify-center text-5xl shadow-lg shadow-violet-500/30 mb-2";
+            } else {
+                title.innerText = 'Makine Tekledi!';
+                desc.innerText = `Toplam ${total} soruda ${score} doğru yaptın. Sonraki aşamaya geçmek için en az %75 başarı gereklidir. Lütfen tekrar dene!`;
+                icon.innerHTML = '🔧';
+                icon.className = "w-24 h-24 mx-auto rounded-[2rem] bg-gradient-to-br from-rose-600 to-red-800 text-white flex items-center justify-center text-5xl shadow-lg shadow-rose-900/30 mb-2";
+            }
+
+            // ÇÖZÜM: Modalı kapatıp ardından sonraki aşamayı veya tekrar denemeyi tetikleyen güvenli akış
+            if (currentStageId < 4 && successRate >= 0.75) {
+                nextBtn.style.display = 'block';
+                nextBtn.innerHTML = `Sonraki Aşama (${currentStageId + 1}) <i class="fa-solid fa-play ml-1"></i>`;
+                nextBtn.onclick = () => {
+                    modal.classList.add('hidden'); // Modalı gizle
+                    startStage(currentStageId + 1); // Sonraki aşamaya geç
+                };
+            } else {
+                nextBtn.style.display = 'block';
+                nextBtn.innerHTML = 'Tekrar Dene <i class="fa-solid fa-rotate-right ml-1"></i>';
+                nextBtn.onclick = () => {
+                    modal.classList.add('hidden'); // Modalı gizle
+                    startStage(currentStageId); // Aynı aşamayı tekrar başlat
+                };
+            }
+
+            modal.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

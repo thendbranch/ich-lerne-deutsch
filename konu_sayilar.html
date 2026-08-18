@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sayılar Konu Anlatımı - Almanca Dünyası</title>
+
+    <meta name="theme-color" content="#080d1a">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #080d1a; color: #f1f5f9; }
+        .dashboard-card { background-color: #0f172a; border-color: #1e293b; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
+
+    <!-- ÜST NAVİGASYON -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Yönlendirme konu_anlatimi.html olarak değiştirildi -->
+            <button onclick="window.location.href='konu_anlatimi.html'" class="flex items-center gap-2 text-slate-400 hover:text-white font-semibold transition-all group">
+                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-slate-700">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </div>
+                <span>Teori Merkezine Dön</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <span class="px-3 py-1 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20 text-xs font-bold uppercase tracking-wider">
+                    A1 Gramer
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ANA İÇERİK (DASHBOARD) -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-8 space-y-8 pb-20">
+
+        <!-- Başlık Kartı -->
+        <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-[2rem] p-6 sm:p-10 flex flex-col md:flex-row items-center gap-8 shadow-xl relative overflow-hidden">
+            <!-- Arka plan efekti -->
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-sky-500/10 blur-[80px] rounded-full"></div>
+            
+            <div class="w-24 h-24 rounded-3xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center text-5xl shadow-lg shadow-sky-500/20 shrink-0 z-10">
+                🔢
+            </div>
+            <div class="z-10 text-center md:text-left">
+                <h1 class="text-3xl sm:text-4xl font-black text-white mb-3 tracking-tight">Sayılar <span class="text-slate-400 font-medium">(Zahlen)</span> Kuralları</h1>
+                <p class="text-slate-400 text-sm sm:text-base max-w-2xl leading-relaxed">
+                    Almancada sayılar belirli bir mantığa oturduğunda çok basittir. Sıfırdan yılların okunuşuna kadar olan temel yapıyı ve istisnaları bu kontrol panelinden öğrenebilirsin.
+                </p>
+            </div>
+        </div>
+
+        <!-- DASHBOARD GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- 1. TEMEL SAYILAR (0-12) -->
+            <div class="dashboard-card border rounded-3xl p-6 shadow-lg hover:border-sky-500/30 transition-all flex flex-col h-full">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-cube"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">1. Temel Sayılar (0-12)</h2>
+                </div>
+                <p class="text-xs text-slate-400 mb-4">Belirli bir kuralı yoktur, matematiğin temelidir ve ezberlenmesi gerekir.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 flex-1 content-start">
+                    <!-- Javascript ile veya elle çoğaltılabilir, elle yazıyoruz -->
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">0</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">null</div><div class="text-[10px] text-sky-400">nul</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">1</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">eins</div><div class="text-[10px] text-sky-400">ayns</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">2</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">zwei</div><div class="text-[10px] text-sky-400">tsvay</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">3</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">drei</div><div class="text-[10px] text-sky-400">dray</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">4</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">vier</div><div class="text-[10px] text-sky-400">fiir</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">5</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">fünf</div><div class="text-[10px] text-sky-400">fünf</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">6</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">sechs</div><div class="text-[10px] text-sky-400">zeks</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">7</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">sieben</div><div class="text-[10px] text-sky-400">ziiben</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">8</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">acht</div><div class="text-[10px] text-sky-400">aht</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">9</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">neun</div><div class="text-[10px] text-sky-400">noyn</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">10</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">zehn</div><div class="text-[10px] text-sky-400">tseen</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">11</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">elf</div><div class="text-[10px] text-sky-400">elf</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800 sm:col-span-2">
+                        <span class="font-black text-slate-500 w-6">12</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">zwölf</div><div class="text-[10px] text-sky-400">tsvölf</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. BİRLEŞİK SAYILAR (13-19) -->
+            <div class="dashboard-card border rounded-3xl p-6 shadow-lg hover:border-emerald-500/30 transition-all flex flex-col h-full">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">2. Birleşik (13-19)</h2>
+                </div>
+                <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-3 mb-4">
+                    <p class="text-xs text-emerald-100/80 font-medium">
+                        <i class="fa-solid fa-lightbulb text-emerald-400 mr-1"></i> Rakam + <b class="text-emerald-400">"-zehn"</b> (on) eklenir. Türkçe gibi ters çalışır.
+                    </p>
+                </div>
+                
+                <div class="space-y-2 flex-1 content-start">
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">13</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">dreizehn</div><div class="text-[10px] text-emerald-400">dray-tseen</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">14</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">vierzehn</div><div class="text-[10px] text-emerald-400">fiir-tseen</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">15</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">fünfzehn</div><div class="text-[10px] text-emerald-400">fünf-tseen</div></div>
+                    </div>
+                    
+                    <!-- İSTİSNALAR (Vurgulu) -->
+                    <div class="flex justify-between items-center p-2.5 bg-emerald-900/30 rounded-xl border border-emerald-500/40 relative overflow-hidden">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-emerald-500"></div>
+                        <span class="font-black text-emerald-400 w-6 pl-2">16</span>
+                        <div class="text-right">
+                            <div class="font-bold text-white text-sm">sechzehn <span class="text-[10px] font-normal text-emerald-300 ml-1">('s' düşer)</span></div>
+                            <div class="text-[10px] text-emerald-400/70">zeh-tseen</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center p-2.5 bg-emerald-900/30 rounded-xl border border-emerald-500/40 relative overflow-hidden">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-emerald-500"></div>
+                        <span class="font-black text-emerald-400 w-6 pl-2">17</span>
+                        <div class="text-right">
+                            <div class="font-bold text-white text-sm">siebzehn <span class="text-[10px] font-normal text-emerald-300 ml-1">('en' düşer)</span></div>
+                            <div class="text-[10px] text-emerald-400/70">ziip-tseen</div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">18</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">achtzehn</div><div class="text-[10px] text-emerald-400">aht-tseen</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">19</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">neunzehn</div><div class="text-[10px] text-emerald-400">noyn-tseen</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. ONARLIK DİLİMLER (20-100) -->
+            <div class="dashboard-card border rounded-3xl p-6 shadow-lg hover:border-amber-500/30 transition-all flex flex-col h-full">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">3. Onarlıklar (20-100)</h2>
+                </div>
+                <div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 mb-4">
+                    <p class="text-xs text-amber-100/80 font-medium">
+                        <i class="fa-solid fa-lightbulb text-amber-400 mr-1"></i> Rakam + <b class="text-amber-400">"-zig"</b> eki getirilir.
+                    </p>
+                </div>
+
+                <div class="space-y-2 flex-1 content-start">
+                    <!-- İstisnalar -->
+                    <div class="flex justify-between items-center p-2.5 bg-amber-900/20 rounded-xl border border-amber-500/30 relative">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-amber-500 rounded-l-xl"></div>
+                        <span class="font-black text-amber-400 w-6 pl-2">20</span>
+                        <div class="text-right">
+                            <div class="font-bold text-white text-sm">zwanzig</div>
+                            <div class="text-[10px] text-amber-400/70">tsvan-tsih (zwei değişir)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center p-2.5 bg-amber-900/20 rounded-xl border border-amber-500/30 relative">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-amber-500 rounded-l-xl"></div>
+                        <span class="font-black text-amber-400 w-6 pl-2">30</span>
+                        <div class="text-right">
+                            <div class="font-bold text-white text-sm">dreißig</div>
+                            <div class="text-[10px] text-amber-400/70">dray-sih (-ßig alır)</div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">40</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">vierzig</div><div class="text-[10px] text-amber-400">fiir-tsih</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">50</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">fünfzig</div><div class="text-[10px] text-amber-400">fünf-tsih</div></div>
+                    </div>
+
+                    <!-- İstisnalar -->
+                    <div class="flex justify-between items-center p-2.5 bg-amber-900/20 rounded-xl border border-amber-500/30 relative">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-amber-500 rounded-l-xl"></div>
+                        <span class="font-black text-amber-400 w-6 pl-2">60</span>
+                        <div class="text-right">
+                            <div class="font-bold text-white text-sm">sechzig</div>
+                            <div class="text-[10px] text-amber-400/70">zeh-tsih ('s' düşer)</div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-amber-900/20 rounded-xl border border-amber-500/30 relative">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-amber-500 rounded-l-xl"></div>
+                        <span class="font-black text-amber-400 w-6 pl-2">70</span>
+                        <div class="text-right">
+                            <div class="font-bold text-white text-sm">siebzig</div>
+                            <div class="text-[10px] text-amber-400/70">ziip-tsih ('en' düşer)</div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">80</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">achtzig</div><div class="text-[10px] text-amber-400">aht-tsih</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-500 w-6">90</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">neunzig</div><div class="text-[10px] text-amber-400">noyn-tsih</div></div>
+                    </div>
+                    <div class="flex justify-between items-center p-2.5 bg-slate-800 rounded-xl border border-slate-700 mt-2">
+                        <span class="font-black text-white w-6">100</span>
+                        <div class="text-right"><div class="font-bold text-white text-sm">(ein)hundert</div><div class="text-[10px] text-amber-400">ayn-hundert</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALT SATIR: 21-99 KURALI (TAM GENİŞLİK) -->
+            <div class="dashboard-card border border-rose-500/30 rounded-3xl p-6 sm:p-8 shadow-lg lg:col-span-3 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden bg-gradient-to-r from-slate-900 to-rose-950/20">
+                <div class="w-16 h-16 rounded-2xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-3xl shrink-0">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-xl font-bold text-rose-400 mb-2">Önemli Kural (21 - 99 Arası Sayılar)</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        Almancada 21'den 99'a kadar olan sayılar okunurken <b>önce birler basamağı, sonra onlar basamağı</b> söylenir. Araya <b>"und" (ve)</b> kelimesi konur. Sayıların tamamı bitişik yazılır.
+                    </p>
+                    <div class="bg-slate-950 rounded-xl border border-slate-800 p-4 inline-flex items-center gap-4 flex-wrap">
+                        <div class="text-2xl font-black text-white">24</div>
+                        <div class="text-slate-500"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="font-mono">
+                            <span class="text-sky-400">vier</span> 
+                            <span class="text-rose-400 font-bold">-und-</span> 
+                            <span class="text-amber-400">zwanzig</span>
+                        </div>
+                        <div class="text-xs text-slate-400 bg-slate-900 px-2 py-1 rounded-md border border-slate-800">
+                            (Dört ve yirmi)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. BİNLER BASAMAĞI -->
+            <div class="dashboard-card border rounded-3xl p-6 shadow-lg hover:border-purple-500/30 transition-all">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">4. Binler (1000+)</h2>
+                </div>
+                <p class="text-xs text-slate-400 mb-4">Türkçedeki mantıkla aynıdır. Kaç bin olduğunu söyleyip sonuna <b>"tausend" (bin)</b> ekleriz.</p>
+                
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-300">1000</span>
+                        <div class="text-right">
+                            <div class="font-bold text-white text-sm">(ein)tausend</div>
+                            <div class="text-[10px] text-purple-400">ayn-tauzent</div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-300">2000</span>
+                        <div class="text-right">
+                            <div class="font-bold text-white text-sm">zweitausend</div>
+                            <div class="text-[10px] text-purple-400">tsvay-tauzent</div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-black text-slate-300">3000</span>
+                        <div class="text-right">
+                            <div class="font-bold text-white text-sm">dreitausend</div>
+                            <div class="text-[10px] text-purple-400">dray-tauzent</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. YILLARIN OKUNUŞU -->
+            <div class="dashboard-card border rounded-3xl p-6 shadow-lg hover:border-teal-500/30 transition-all lg:col-span-2">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">5. Yılların Okunuşu (Jahreszahlen)</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Kural 1: 1999 ve Öncesi -->
+                    <div class="space-y-4">
+                        <div class="bg-teal-500/10 text-teal-400 text-xs font-bold px-3 py-1.5 rounded-lg border border-teal-500/20 inline-block">
+                            1999 ve Öncesi Kuralı
+                        </div>
+                        <p class="text-sm text-slate-300">Sayılar "yüzlük" dilimler halinde bölünerek okunur. <br><i>Örn: 19 yüz 94</i></p>
+                        
+                        <div class="space-y-3">
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <div class="font-black text-white text-lg mb-1">1994</div>
+                                <div class="text-sm font-semibold text-teal-300">neunzehnhundertvierundneunzig</div>
+                                <div class="text-[10px] text-slate-500 mt-1">Mantık: neunzehn-hundert + vier-und-neunzig</div>
+                                <div class="text-[10px] text-slate-400">🔊 noyn-tseen-hundert-fiir-unt-noyn-tsih</div>
+                            </div>
+                            
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <div class="font-black text-white text-lg mb-1">1996</div>
+                                <div class="text-sm font-semibold text-teal-300">neunzehnhundertsechsundneunzig</div>
+                                <div class="text-[10px] text-slate-500 mt-1">Mantık: neunzehn-hundert + sechs-und-neunzig</div>
+                                <div class="text-[10px] text-slate-400">🔊 noyn-tseen-hundert-zeks-unt-noyn-tsih</div>
+                            </div>
+                            
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <div class="font-black text-white text-lg mb-1">1998</div>
+                                <div class="text-sm font-semibold text-teal-300">neunzehnhundertachtundneunzig</div>
+                                <div class="text-[10px] text-slate-500 mt-1">Mantık: neunzehn-hundert + acht-und-neunzig</div>
+                                <div class="text-[10px] text-slate-400">🔊 noyn-tseen-hundert-aht-unt-noyn-tsih</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kural 2: 2000 ve Sonrası -->
+                    <div class="space-y-4 border-t border-slate-800 pt-6 md:border-t-0 md:border-l md:pt-0 md:pl-6">
+                        <div class="bg-blue-500/10 text-blue-400 text-xs font-bold px-3 py-1.5 rounded-lg border border-blue-500/20 inline-block">
+                            2000 ve Sonrası Kuralı
+                        </div>
+                        <p class="text-sm text-slate-300">Normal sayılar nasıl okunuyorsa aynen öyle okunur. <br><i>Örn: İki bin yirmi dört</i></p>
+                        
+                        <div class="space-y-3">
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <div class="font-black text-white text-lg mb-1">2000</div>
+                                <div class="text-sm font-semibold text-blue-300">zweitausend</div>
+                                <div class="text-[10px] text-slate-500 mt-1">Mantık: İki bin</div>
+                                <div class="text-[10px] text-slate-400">🔊 tsvay-tauzent</div>
+                            </div>
+                            
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <div class="font-black text-white text-lg mb-1">2024</div>
+                                <div class="text-sm font-semibold text-blue-300">zweitausendvierundzwanzig</div>
+                                <div class="text-[10px] text-slate-500 mt-1">Mantık: zwei-tausend + vier-und-zwanzig</div>
+                                <div class="text-[10px] text-slate-400">🔊 tsvay-tauzent-fiir-unt-tsvan-tsih</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRATİK YÖNLENDİRMESİ (YENİ EKLENEN CTA) -->
+            <div class="dashboard-card border border-sky-500/50 rounded-3xl p-6 sm:p-8 shadow-lg lg:col-span-3 relative overflow-hidden bg-gradient-to-r from-sky-900/40 to-blue-900/20 text-center flex flex-col items-center justify-center space-y-4">
+                <div class="w-16 h-16 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-3xl shadow-inner mb-2">
+                    <i class="fa-solid fa-gamepad"></i>
+                </div>
+                <h3 class="text-2xl font-black text-white">Kuralları Öğrendin mi?</h3>
+                <p class="text-sm text-slate-300 max-w-md">
+                    Sayıları sadece okuyarak değil, kullanarak öğrenirsin. Seviyeli sayı testine girip matematikte ve rakamlarda hızlan.
+                </p>
+                <button onclick="window.location.href='alistirma_sayilar.html'" class="px-8 py-4 bg-sky-600 hover:bg-sky-500 text-white font-bold text-lg rounded-2xl shadow-xl shadow-sky-500/20 transition-all hover:-translate-y-1 mt-4">
+                    Sayılar Alıştırmasına Git <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

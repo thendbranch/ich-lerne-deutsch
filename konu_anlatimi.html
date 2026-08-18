@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Konu Anlatımları - Almanca Dünyası</title>
+
+    <meta name="theme-color" content="#080d1a">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #080d1a; color: #f1f5f9; }
+        
+        .topic-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background-color: rgba(15, 23, 42, 0.8); }
+        .topic-card:hover { transform: translateY(-6px); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white relative">
+
+    <!-- ARKA PLAN IŞIK EFEKTLERİ -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-sky-600/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-violet-600/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+
+    <!-- ÜST NAVİGASYON -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <button onclick="window.location.href='anasayfa.html'" class="flex items-center gap-2 text-slate-400 hover:text-white font-semibold transition-all group">
+                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </div>
+                <span>Karargaha Dön</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <span class="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold flex items-center gap-1.5">
+                    <i class="fa-solid fa-book-open text-sky-400"></i> Teori Merkezi
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ANA İÇERİK -->
+    <main class="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-8 space-y-8 relative z-10 pb-20">
+
+        <!-- BAŞLIK -->
+        <div class="space-y-3">
+            <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight">A1 Konu Anlatımları</h1>
+            <p class="text-slate-400 text-sm sm:text-base max-w-2xl leading-relaxed">
+                Almancanın şifrelerini çözdüğümüz alana hoş geldin. Öğrenmek istediğin konuyu seç ve kuralları keşfet.
+            </p>
+        </div>
+
+        <!-- KONULAR GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- KART 1: SAYILAR (Zahlen) -->
+            <div onclick="window.location.href='konu_sayilar.html'" class="topic-card border border-sky-500/20 hover:border-sky-500/50 rounded-3xl p-6 cursor-pointer group shadow-lg hover:shadow-[0_10px_30px_rgba(14,165,233,0.15)] flex flex-col h-full relative overflow-hidden">
+                <div class="absolute -right-6 -top-6 w-24 h-24 bg-sky-500/10 blur-2xl rounded-full group-hover:bg-sky-500/20 transition-all"></div>
+                
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 text-white flex items-center justify-center text-2xl font-black shadow-md shadow-sky-500/20">
+                        🔢
+                    </div>
+                    <span class="px-2.5 py-1 rounded-lg bg-sky-500/10 text-sky-400 text-[10px] font-black uppercase tracking-widest border border-sky-500/20">
+                        Açık
+                    </span>
+                </div>
+                
+                <div class="flex-1 space-y-2">
+                    <h3 class="text-xl font-bold text-white group-hover:text-sky-400 transition-colors">1. Sayılar (Zahlen)</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        0'dan yılların okunuşuna kadar tüm kurallar. 21-99 arası ters okuma mantığı ve matematik terimleri.
+                    </p>
+                </div>
+                
+                <div class="mt-6 flex items-center text-sky-400 text-sm font-bold gap-2 group-hover:gap-3 transition-all">
+                    Dersi İncele <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- KART 2: KİŞİ ZAMİRLERİ (Personalpronomen) -->
+            <div onclick="window.location.href='konu_zamirler.html'" class="topic-card border border-emerald-500/20 hover:border-emerald-500/50 rounded-3xl p-6 cursor-pointer group shadow-lg hover:shadow-[0_10px_30px_rgba(16,185,129,0.15)] flex flex-col h-full relative overflow-hidden">
+                <div class="absolute -right-6 -top-6 w-24 h-24 bg-emerald-500/10 blur-2xl rounded-full group-hover:bg-emerald-500/20 transition-all"></div>
+                
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 text-white flex items-center justify-center text-2xl font-black shadow-md shadow-emerald-500/20">
+                        👥
+                    </div>
+                    <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
+                        Açık
+                    </span>
+                </div>
+                
+                <div class="flex-1 space-y-2">
+                    <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">2. Kişi Zamirleri</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Cümlenin kahramanları. Ben, sen, o... ve Almancanın en çok karıştırılan "3 Farklı Sie" tuzağı!
+                    </p>
+                </div>
+                
+                <div class="mt-6 flex items-center text-emerald-400 text-sm font-bold gap-2 group-hover:gap-3 transition-all">
+                    Dersi İncele <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- KART 3: FİİLLER GRUP 1 (Verben) -->
+            <div onclick="window.location.href='konu_fiiller.html'" class="topic-card border border-violet-500/20 hover:border-violet-500/50 rounded-3xl p-6 cursor-pointer group shadow-lg hover:shadow-[0_10px_30px_rgba(139,92,246,0.15)] flex flex-col h-full relative overflow-hidden">
+                <div class="absolute -right-6 -top-6 w-24 h-24 bg-violet-500/10 blur-2xl rounded-full group-hover:bg-violet-500/20 transition-all"></div>
+                
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-600 text-white flex items-center justify-center text-2xl font-black shadow-md shadow-violet-500/20">
+                        ⚙️
+                    </div>
+                    <span class="px-2.5 py-1 rounded-lg bg-violet-500/10 text-violet-400 text-[10px] font-black uppercase tracking-widest border border-violet-500/20">
+                        Açık
+                    </span>
+                </div>
+                
+                <div class="flex-1 space-y-2">
+                    <h3 class="text-xl font-bold text-white group-hover:text-violet-400 transition-colors">3. Düzenli Fiiller</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Fiil kökünü bul ve sihirli takıları ekle! Hiç şaşmayan kuralıyla "Grup 1" fiillerin çekim mantığı.
+                    </p>
+                </div>
+                
+                <div class="mt-6 flex items-center text-violet-400 text-sm font-bold gap-2 group-hover:gap-3 transition-all">
+                    Dersi İncele <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- KART 4: SELAMLAŞMA (KİLİTLİ) -->
+            <div class="border border-slate-800 rounded-3xl p-6 bg-slate-950 flex flex-col h-full relative overflow-hidden opacity-75 cursor-not-allowed">
+                <!-- Kilit Katmanı -->
+                <div class="absolute inset-0 bg-slate-950/50 backdrop-blur-[2px] z-10 flex flex-col items-center justify-center p-6 text-center">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl font-bold mb-2">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm">Pratik Gerekiyor</h4>
+                    <p class="text-[10px] text-slate-400 mt-1">Açılması için Alıştırmalarda Şampiyon ol!</p>
+                </div>
+
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-800 text-slate-500 flex items-center justify-center text-2xl font-black">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                </div>
+                
+                <div class="flex-1 space-y-2">
+                    <h3 class="text-xl font-bold text-slate-500">4. Selamlaşma</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Günün saatlerine göre kullanılan temel selamlama ve veda ifadeleri.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

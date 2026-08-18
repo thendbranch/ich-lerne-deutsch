@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sayılar Alıştırması - Almanca Dünyası</title>
+
+    <meta name="theme-color" content="#080d1a">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Canvas Confetti Library (Tebrikler için) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #080d1a; color: #f1f5f9; }
+        .trainer-card { background-color: #0f172a; border-color: #1e293b; }
+        
+        /* Input için özel odaklanma efekti */
+        .input-glow:focus { box-shadow: 0 0 15px rgba(14, 165, 233, 0.3); outline: none; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-sky-500 selection:text-white relative">
+
+    <!-- ÜST NAVİGASYON -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-4">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <!-- Yönlendirme alistirmalar.html olarak güncellendi -->
+            <button onclick="window.location.href='alistirmalar.html'" class="flex items-center gap-2 text-slate-400 hover:text-white font-semibold transition-all group">
+                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </div>
+                <span>Pratik Merkezine Dön</span>
+            </button>
+            <div class="flex items-center gap-3">
+                <button onclick="restartCurrentLevel()" title="Seviyeyi Baştan Başlat" class="px-3 py-1.5 rounded-xl bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 text-xs font-bold transition-all flex items-center gap-1.5 border border-amber-500/20">
+                    <i class="fa-solid fa-rotate-right"></i> Yeniden Başlat
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ANA İÇERİK (ALIŞTIRMA ALANI) -->
+    <main class="flex-1 max-w-3xl w-full mx-auto p-4 sm:p-8 space-y-6 flex flex-col justify-center">
+
+        <!-- BAŞLIK VE SEVİYE BİLGİSİ -->
+        <div class="text-center space-y-2 mb-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-bold uppercase tracking-wider mb-2">
+                <i class="fa-solid fa-gamepad"></i> Zahlen-Trainer
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-black text-white">Sayılar Alıştırması</h1>
+            <p id="trainer-level-indicator" class="text-sm text-slate-400 font-medium">Seviye yükleniyor...</p>
+        </div>
+
+        <!-- OYUN KARTI -->
+        <div id="modal-card" class="trainer-card border rounded-[2rem] shadow-2xl p-6 sm:p-10 space-y-8 relative overflow-hidden transition-all duration-500">
+            
+            <!-- Arka Plan Efekti -->
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-sky-500/5 blur-[80px] rounded-full pointer-events-none"></div>
+
+            <!-- İlerleme Çubuğu -->
+            <div class="space-y-2 relative z-10">
+                <div class="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-wider">
+                    <span>İlerleme</span>
+                    <span id="trainer-progress-text" class="text-sky-400">1 / 18</span>
+                </div>
+                <div class="w-full h-3 bg-slate-900 rounded-full overflow-hidden border border-slate-800">
+                    <div id="trainer-progress-bar" class="h-full bg-gradient-to-r from-sky-500 to-blue-500 transition-all duration-500 shadow-[0_0_10px_rgba(14,165,233,0.5)]" style="width: 5%;"></div>
+                </div>
+            </div>
+
+            <!-- Soru Gösterim Alanı -->
+            <div id="question-box" class="bg-slate-950/80 border border-slate-800 rounded-3xl p-8 sm:p-12 text-center space-y-4 transition-all duration-500 shadow-inner">
+                <span id="question-type-label" class="text-xs font-bold uppercase tracking-widest text-slate-500">Soru Tipi</span>
+                <div id="trainer-question-display" class="text-5xl sm:text-7xl font-black text-white tracking-tighter drop-shadow-lg">
+                    --
+                </div>
+            </div>
+
+            <!-- Kullanıcı Giriş Formu -->
+            <form id="trainer-form" onsubmit="handleZahlenSubmit(event)" class="space-y-5 relative z-10">
+                <div class="relative">
+                    <label class="block text-xs font-bold text-slate-400 mb-2 ml-2">Almanca Yazılışı (Küçük harfle):</label>
+                    <input type="text" id="trainer-user-input" autocomplete="off" placeholder="Örn: fünf" class="input-glow w-full px-6 py-5 bg-slate-900/80 border-2 border-slate-700 focus:border-sky-500 rounded-2xl text-white text-xl sm:text-2xl text-center font-bold placeholder:text-slate-600 transition-all">
+                </div>
+
+                <button id="trainer-submit-btn" type="submit" class="w-full py-5 bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-black text-lg rounded-2xl shadow-xl shadow-sky-600/20 transition-all hover:-translate-y-1 active:translate-y-0">
+                    Cevabı Kontrol Et <span class="text-xs font-normal opacity-75 ml-2">(Enter ↵)</span>
+                </button>
+            </form>
+
+            <!-- Geri Bildirim Alanı (Doğru/Yanlış) -->
+            <div id="trainer-feedback" class="hidden p-5 rounded-2xl border-2 text-base font-medium space-y-2 transform transition-all duration-300"></div>
+
+            <!-- Sonraki Soru Butonu -->
+            <button id="trainer-next-btn" onclick="nextZahlenQuestion()" class="hidden w-full py-5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 text-white font-bold text-lg rounded-2xl transition-all shadow-lg hover:-translate-y-1 active:translate-y-0">
+                Sonraki Soru <i class="fa-solid fa-arrow-right ml-2"></i> <span class="text-xs font-normal opacity-75 ml-2">(Enter ↵)</span>
+            </button>
+        </div>
+
+    </main>
+
+    <!-- SEVİYE ATLAMA / TEBRİK MODALI (Özel Yapı) -->
+    <div id="level-up-modal" class="fixed inset-0 z-50 hidden bg-slate-950/95 backdrop-blur-md p-6 flex flex-col items-center justify-center transition-opacity">
+        <div class="max-w-md w-full bg-gradient-to-b from-slate-900 to-slate-950 border border-amber-500/40 rounded-[2.5rem] p-8 sm:p-10 text-center space-y-6 shadow-[0_0_50px_rgba(245,158,11,0.15)] relative overflow-hidden transform scale-95 transition-transform duration-300" id="modal-content-box">
+            
+            <div id="levelup-badge-icon" class="w-24 h-24 mx-auto rounded-[2rem] bg-gradient-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center text-5xl shadow-lg shadow-amber-500/30 mb-2">
+                🏆
+            </div>
+            
+            <div class="space-y-3 relative z-10">
+                <h3 id="levelup-title" class="text-3xl font-black text-white">Seviye Tamamlandı!</h3>
+                <p id="levelup-desc" class="text-slate-400 text-sm sm:text-base leading-relaxed">
+                    Harika bir performans!
+                </p>
+            </div>
+            
+            <button id="levelup-action-btn" onclick="closeLevelUpModal()" class="w-full mt-4 py-4 bg-white hover:bg-slate-200 text-slate-950 font-extrabold text-lg rounded-2xl shadow-xl transition-all hover:scale-105 active:scale-95">
+                Devam Et <i class="fa-solid fa-play ml-1"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- UYGULAMA MANTIĞI (JAVASCRIPT) -->
+    <script>
+        // --- ALMANCA SAYI DÖNÜŞTÜRÜCÜ & TELAFFUZ MOTORU ---
+        const EINER = ["", "eins", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun"];
+        const ZEHNER = ["", "zehn", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig"];
+        const SONDER = { 11: "elf", 12: "zwölf", 16: "sechzehn", 17: "siebzehn" };
+
+        function zahlZuWort(n) {
+            if (n === 0) return "null";
+            if (SONDER[n]) return SONDER[n];
+            if (n < 10) return EINER[n];
+            if (n < 20) return EINER[n % 10] + "zehn";
+            if (n < 100) {
+                let e = n % 10;
+                let z = Math.floor(n / 10);
+                if (e === 0) return ZEHNER[z];
+                if (e === 1) return "einund" + ZEHNER[z];
+                return EINER[e] + "und" + ZEHNER[z];
+            }
+            if (n < 1000) {
+                let h = Math.floor(n / 100);
+                let rest = n % 100;
+                let hStr = (h === 1) ? "einhundert" : EINER[h] + "hundert";
+                if (rest === 0) return hStr;
+                return hStr + zahlZuWort(rest);
+            }
+            if (n <= 10000) {
+                let t = Math.floor(n / 1000);
+                let rest = n % 1000;
+                let tStr = (t === 1) ? "eintausend" : EINER[t] + "tausend";
+                if (rest === 0) return tStr;
+                return tStr + zahlZuWort(rest);
+            }
+            return n.toString();
+        }
+
+        function okunusOlustur(word) {
+            return word
+                .replace(/eins/g, "ayns ")
+                .replace(/zwei/g, "tsvay ")
+                .replace(/drei/g, "dray ")
+                .replace(/vier/g, "fiir ")
+                .replace(/fünf/g, "fünf ")
+                .replace(/sechs/g, "zeks ")
+                .replace(/sieben/g, "ziiben ")
+                .replace(/acht/g, "aht ")
+                .replace(/neun/g, "noyn ")
+                .replace(/zehn/g, "tseen ")
+                .replace(/elf/g, "elf ")
+                .replace(/zwölf/g, "tsvölf ")
+                .replace(/zwanzig/g, "tsvantsih ")
+                .replace(/dreißig/g, "draysih ")
+                .replace(/vierzig/g, "fiirtsih ")
+                .replace(/fünfzig/g, "fünftsih ")
+                .replace(/sechzig/g, "zehtsih ")
+                .replace(/siebzig/g, "ziibtsih ")
+                .replace(/achtzig/g, "ahtsih ")
+                .replace(/neunzig/g, "noyntsih ")
+                .replace(/hundert/g, "hundert ")
+                .replace(/tausend/g, "tauzent ")
+                .replace(/und/g, "unt ")
+                .trim();
+        }
+
+        // --- OYUN DURUMU (STATE) ---
+        let gameState = {
+            currentLevel: 1,
+            questions: [],
+            currentIndex: 0,
+            correctCount: 0,
+            isAnswered: false
+        };
+
+        const LEVEL_THEMES = {
+            1: { 
+                indicator: "Seviye 1: 1 - 12 (12 Sayı + 6 Matematik)", 
+                bgClass: "border-sky-500/30", 
+                accent: "text-sky-400" 
+            },
+            2: { 
+                indicator: "Seviye 2: 13 - 100 (10 Sayı + 6 Matematik)", 
+                bgClass: "border-emerald-500/30", 
+                accent: "text-emerald-400" 
+            },
+            3: { 
+                indicator: "Seviye 3: 101 - 1000 (10 Sayı + 6 Matematik)", 
+                bgClass: "border-amber-500/30", 
+                accent: "text-amber-400" 
+            },
+            4: { 
+                indicator: "Seviye 4: 1000 - 9999 (5 Sayı)", 
+                bgClass: "border-purple-500/30", 
+                accent: "text-purple-400" 
+            },
+            5: { 
+                indicator: "Seviye 5: Şampiyonluk Matematik Sınavı", 
+                bgClass: "border-rose-500/30", 
+                accent: "text-rose-400" 
+            }
+        };
+
+        // --- YARDIMCI FONKSİYONLAR ---
+        function generateMathQuestions(maxVal) {
+            let list = [];
+            // 3 adet Rakamlı soru
+            for(let i=0; i<3; i++) {
+                let a = Math.floor(Math.random() * (maxVal - 2)) + 2;
+                let b = Math.floor(Math.random() * (a - 1)) + 1;
+                list.push({ isMath: true, text: `${a} - ${b} = ?`, answer: zahlZuWort(a - b), label: "Matematik (Rakamlı)" });
+            }
+            // 3 adet Almanca Metinli soru
+            for(let i=0; i<3; i++) {
+                let a = Math.floor(Math.random() * (maxVal - 2)) + 2;
+                let b = Math.floor(Math.random() * (a - 1)) + 1;
+                list.push({ isMath: true, text: `${zahlZuWort(a)} minus ${zahlZuWort(b)} = ?`, answer: zahlZuWort(a - b), label: "Matematik (Metinli)" });
+            }
+            return list;
+        }
+
+        function generateRandomNumbers(min, max, count) {
+            let res = [];
+            for(let i=0; i<count; i++) {
+                res.push(Math.floor(Math.random() * (max - min + 1)) + min);
+            }
+            return res;
+        }
+
+        function triggerConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 150, spread: 100, origin: { y: 0.5 }, colors: ['#38bdf8', '#34d399', '#fbbf24'] });
+            }
+        }
+
+        // --- TEMEL OYUN DÖNGÜSÜ ---
+        function startLevel(lvl) {
+            gameState.currentLevel = lvl;
+            gameState.currentIndex = 0;
+            gameState.correctCount = 0;
+            gameState.isAnswered = false;
+
+            let theme = LEVEL_THEMES[lvl];
+            document.getElementById('trainer-level-indicator').innerText = theme.indicator;
+            document.getElementById('trainer-level-indicator').className = `text-sm font-bold ${theme.accent}`;
+            
+            const card = document.getElementById('question-box');
+            card.className = `bg-slate-950/80 border-2 ${theme.bgClass} rounded-3xl p-8 sm:p-12 text-center space-y-4 transition-all duration-500 shadow-inner`;
+
+            // Soru Havuzu Oluşturma
+            if (lvl === 1) {
+                let numbers = Array.from({length: 12}, (_, i) => i + 1).sort(() => Math.random() - 0.5);
+                let math = generateMathQuestions(10);
+                gameState.questions = [...numbers, ...math].sort(() => Math.random() - 0.5); // Karıştır
+            } else if (lvl === 2) {
+                let numbers = generateRandomNumbers(13, 100, 10);
+                let math = generateMathQuestions(50);
+                gameState.questions = [...numbers, ...math].sort(() => Math.random() - 0.5);
+            } else if (lvl === 3) {
+                let numbers = generateRandomNumbers(101, 1000, 10);
+                let math = generateMathQuestions(100);
+                gameState.questions = [...numbers, ...math].sort(() => Math.random() - 0.5);
+            } else if (lvl === 4) {
+                gameState.questions = generateRandomNumbers(1000, 9999, 5);
+            } else if (lvl === 5) {
+                gameState.questions = [
+                    { isMath: true, text: "zehn plus fünf = ?", answer: "fünfzehn", label: "Final Sınavı 1/3" },
+                    { isMath: true, text: "dreißig minus zehn = ?", answer: "zwanzig", label: "Final Sınavı 2/3" },
+                    { isMath: true, text: "vier * drei = ?", answer: "zwölf", label: "Final Sınavı 3/3" }
+                ];
+            }
+
+            renderQuestion();
+        }
+
+        function restartCurrentLevel() {
+            startLevel(gameState.currentLevel);
+        }
+
+        function renderQuestion() {
+            gameState.isAnswered = false;
+            
+            const feedback = document.getElementById('trainer-feedback');
+            feedback.classList.add('hidden');
+            feedback.classList.remove('scale-100', 'opacity-100');
+            
+            document.getElementById('trainer-next-btn').classList.add('hidden');
+            document.getElementById('trainer-submit-btn').classList.remove('hidden');
+            
+            const input = document.getElementById('trainer-user-input');
+            input.value = '';
+            input.disabled = false;
+            input.focus();
+
+            let total = gameState.questions.length;
+            let current = gameState.currentIndex + 1;
+
+            document.getElementById('trainer-progress-text').innerText = `${current} / ${total}`;
+            document.getElementById('trainer-progress-bar').style.width = `${(current / total) * 100}%`;
+
+            let q = gameState.questions[gameState.currentIndex];
+            let display = document.getElementById('trainer-question-display');
+            let label = document.getElementById('question-type-label');
+
+            if (typeof q === 'number') {
+                label.innerText = "Sayı Yazılış Sorusu";
+                display.innerText = q;
+            } else if (q.isMath) {
+                label.innerText = q.label || "Matematik İşlemi";
+                display.innerText = q.text;
+            }
+        }
+
+        function handleZahlenSubmit(e) {
+            e.preventDefault();
+            if (gameState.isAnswered) return;
+
+            let userInput = document.getElementById('trainer-user-input').value.trim().toLowerCase();
+            let feedback = document.getElementById('trainer-feedback');
+
+            if (!userInput) {
+                feedback.classList.remove('hidden');
+                feedback.className = "p-4 rounded-2xl border-2 text-sm font-semibold bg-amber-500/10 border-amber-500/50 text-amber-400 transform scale-100 transition-all";
+                feedback.innerHTML = '<i class="fa-solid fa-circle-exclamation mr-1"></i> Lütfen cevap alanını boş bırakmayınız!';
+                
+                // Biraz sarsma efekti (Opsiyonel görsel geri bildirim)
+                const inputField = document.getElementById('trainer-user-input');
+                inputField.classList.add('translate-x-2');
+                setTimeout(() => inputField.classList.remove('translate-x-2'), 100);
+                return;
+            }
+
+            let q = gameState.questions[gameState.currentIndex];
+            let targetAnswer = (typeof q === 'number') ? zahlZuWort(q) : q.answer;
+
+            feedback.classList.remove('hidden');
+
+            if (userInput === targetAnswer) {
+                gameState.correctCount++;
+                feedback.className = "p-5 rounded-2xl border-2 text-base font-medium space-y-2 bg-emerald-500/10 border-emerald-500/50 text-emerald-400 transform scale-100 transition-all";
+                feedback.innerHTML = `
+                    <div class="flex items-center gap-2 text-lg"><i class="fa-solid fa-circle-check"></i> <b>Richtig! (Doğru)</b></div>
+                    <div class="text-sm text-emerald-300/80 bg-emerald-950/50 p-2 rounded-xl mt-2 inline-block">
+                        <i class="fa-solid fa-volume-high mr-1"></i> [${okunusOlustur(targetAnswer)}]
+                    </div>
+                `;
+            } else {
+                feedback.className = "p-5 rounded-2xl border-2 text-base font-medium space-y-2 bg-rose-500/10 border-rose-500/50 text-rose-400 transform scale-100 transition-all";
+                feedback.innerHTML = `
+                    <div class="flex items-center gap-2 text-lg"><i class="fa-solid fa-circle-xmark"></i> <b>Falsch! (Yanlış)</b></div>
+                    <div class="bg-rose-950/50 p-3 rounded-xl mt-2">
+                        <div class="text-white text-sm mb-1">👉 Doğru Cevap: <span class="font-bold text-rose-300 text-lg ml-1">${targetAnswer}</span></div>
+                        <div class="text-xs text-rose-300/80"><i class="fa-solid fa-volume-high mr-1"></i> [${okunusOlustur(targetAnswer)}]</div>
+                    </div>
+                `;
+            }
+
+            gameState.isAnswered = true;
+            document.getElementById('trainer-user-input').disabled = true;
+            document.getElementById('trainer-submit-btn').classList.add('hidden');
+            document.getElementById('trainer-next-btn').classList.remove('hidden');
+            
+            // Focus on next button so Enter works immediately
+            document.getElementById('trainer-next-btn').focus();
+        }
+
+        function nextZahlenQuestion() {
+            gameState.currentIndex++;
+
+            if (gameState.currentIndex < gameState.questions.length) {
+                renderQuestion();
+            } else {
+                // Seviye Bitti, Kontrol Et
+                let total = gameState.questions.length;
+                let passRequirement = (gameState.currentLevel === 1) ? total : Math.ceil(total * 0.85); // Seviye 1'de sıfır hata kuralı
+
+                if (gameState.correctCount >= passRequirement) {
+                    triggerConfetti();
+                    if (gameState.currentLevel < 5) {
+                        showCustomModal(
+                            `Seviye ${gameState.currentLevel} Tamamlandı! 🚀`,
+                            `Mükemmel iş çıkardın! Seviye ${gameState.currentLevel}'i başarıyla bitirdin. Şimdi Seviye ${gameState.currentLevel + 1}'in zorluklarına hazırsın.`,
+                            () => startLevel(gameState.currentLevel + 1),
+                            'success'
+                        );
+                    } else {
+                        // Tüm oyun bitti
+                        localStorage.setItem('baris_zahlen_champion', 'true');
+                        showCustomModal(
+                            '🌟 ŞAMPİYON UNVANI KAZANILDI!',
+                            'İnanılmaz! Sayılar ve Matematik modülünün tüm seviyelerini bitirerek ŞAMPİYON oldun! Selamlaşma dersinin kilidi açıldı.',
+                            () => window.location.href = 'alistirmalar.html',
+                            'champion'
+                        );
+                    }
+                } else {
+                    showCustomModal(
+                        `Seviye ${gameState.currentLevel} Tekrarı 🔄`,
+                        `Bu seviyede ${total} soruda ${gameState.correctCount} doğru yaptın. Hedefe ulaşmak için biraz daha pratik yapmalı ve seviyeyi baştan almalısın!`,
+                        () => startLevel(gameState.currentLevel),
+                        'fail'
+                    );
+                }
+            }
+        }
+
+        // --- MODAL YÖNETİMİ ---
+        let levelUpCallback = null;
+        function showCustomModal(title, desc, callback, type) {
+            const modal = document.getElementById('level-up-modal');
+            const contentBox = document.getElementById('modal-content-box');
+            const icon = document.getElementById('levelup-badge-icon');
+            const actionBtn = document.getElementById('levelup-action-btn');
+            
+            document.getElementById('levelup-title').innerText = title;
+            document.getElementById('levelup-desc').innerText = desc;
+            levelUpCallback = callback;
+
+            // Tip bazlı stillendirme
+            if(type === 'fail') {
+                icon.innerHTML = '💪';
+                icon.className = "w-24 h-24 mx-auto rounded-[2rem] bg-gradient-to-br from-rose-400 to-red-600 text-white flex items-center justify-center text-5xl shadow-lg shadow-rose-500/30 mb-2";
+                contentBox.className = "max-w-md w-full bg-gradient-to-b from-slate-900 to-slate-950 border border-rose-500/40 rounded-[2.5rem] p-8 sm:p-10 text-center space-y-6 shadow-[0_0_50px_rgba(244,63,94,0.15)] relative overflow-hidden transform scale-100 transition-transform duration-300";
+                actionBtn.innerHTML = 'Tekrar Dene <i class="fa-solid fa-rotate-right ml-1"></i>';
+            } else if (type === 'champion') {
+                icon.innerHTML = '👑';
+                icon.className = "w-24 h-24 mx-auto rounded-[2rem] bg-gradient-to-br from-yellow-300 to-amber-500 text-slate-900 flex items-center justify-center text-5xl shadow-lg shadow-amber-500/50 mb-2";
+                actionBtn.innerHTML = 'Pratik Merkezine Dön <i class="fa-solid fa-dumbbell ml-1"></i>';
+            } else {
+                // Success varsayılan
+                icon.innerHTML = '🎯';
+                icon.className = "w-24 h-24 mx-auto rounded-[2rem] bg-gradient-to-br from-emerald-400 to-teal-500 text-white flex items-center justify-center text-5xl shadow-lg shadow-emerald-500/30 mb-2";
+                contentBox.className = "max-w-md w-full bg-gradient-to-b from-slate-900 to-slate-950 border border-emerald-500/40 rounded-[2.5rem] p-8 sm:p-10 text-center space-y-6 shadow-[0_0_50px_rgba(16,185,129,0.15)] relative overflow-hidden transform scale-100 transition-transform duration-300";
+                actionBtn.innerHTML = 'Devam Et <i class="fa-solid fa-play ml-1"></i>';
+            }
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.add('opacity-100');
+                contentBox.classList.add('scale-100');
+                contentBox.classList.remove('scale-95');
+                actionBtn.focus();
+            }, 10);
+        }
+
+        function closeLevelUpModal() {
+            const modal = document.getElementById('level-up-modal');
+            const contentBox = document.getElementById('modal-content-box');
+            
+            modal.classList.remove('opacity-100');
+            contentBox.classList.remove('scale-100');
+            contentBox.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                if (levelUpCallback) levelUpCallback();
+            }, 300); // animasyon süresi
+        }
+
+        // --- SAYFA YÜKLENDİĞİNDE ---
+        window.addEventListener('DOMContentLoaded', () => {
+            // Klavye Enter Tuşu Dinleyicisi
+            document.addEventListener('keydown', (e) => {
+                const modal = document.getElementById('level-up-modal');
+                // Eğer modal açıksa, Enter modal butonuna bassın
+                if (!modal.classList.contains('hidden')) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        closeLevelUpModal();
+                    }
+                    return;
+                }
+
+                // Modal kapalıysa normal oyun akışı
+                if (e.key === 'Enter') {
+                    if (gameState.isAnswered) {
+                        e.preventDefault();
+                        nextZahlenQuestion();
+                    }
+                }
+            });
+
+            // Oyunu Başlat
+            startLevel(1);
+        });
+    </script>
+</body>
+</html>

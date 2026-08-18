@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fiiller (Grup 1) - Barış'ın Almanca Dünyası</title>
+
+    <meta name="theme-color" content="#080d1a">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #080d1a; color: #f1f5f9; }
+        .dashboard-card { background-color: #0f172a; border-color: #1e293b; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-violet-500 selection:text-white">
+
+    <!-- ÜST NAVİGASYON -->
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Yönlendirme konu_anlatimi.html olarak güncellendi -->
+            <button onclick="window.location.href='konu_anlatimi.html'" class="flex items-center gap-2 text-slate-400 hover:text-white font-semibold transition-all group">
+                <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-slate-700">
+                    <i class="fa-solid fa-arrow-left text-sm"></i>
+                </div>
+                <span>Teori Merkezine Dön</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <span class="px-3 py-1 rounded-full bg-violet-500/10 text-violet-400 border border-violet-500/20 text-xs font-bold uppercase tracking-wider">
+                    A1 Gramer
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ANA İÇERİK -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-8 space-y-8 pb-20">
+
+        <!-- Başlık Kartı -->
+        <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-[2rem] p-6 sm:p-10 flex flex-col md:flex-row items-center gap-8 shadow-xl relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-violet-500/10 blur-[80px] rounded-full"></div>
+            
+            <div class="w-24 h-24 rounded-3xl bg-gradient-to-br from-violet-500 to-fuchsia-600 flex items-center justify-center text-5xl shadow-lg shadow-violet-500/20 shrink-0 z-10">
+                ⚙️
+            </div>
+            <div class="z-10 text-center md:text-left">
+                <h1 class="text-3xl sm:text-4xl font-black text-white mb-3 tracking-tight">Fiiller <span class="text-slate-400 font-medium">(Verben)</span> - Grup 1</h1>
+                <p class="text-slate-400 text-sm sm:text-base max-w-2xl leading-relaxed">
+                    Almancada fiiller toplam 8 gruba ayrılır. Biz bugün temel atıyoruz: <b>Grup 1 (Düzenli Fiiller)</b>. Hiçbir istisnası olmayan, tıkır tıkır işleyen makine gibi bir kural öğreneceğiz.
+                </p>
+            </div>
+        </div>
+
+        <!-- DASHBOARD GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- ADIM 1: LEGO MANTIĞI -->
+            <div class="dashboard-card border rounded-3xl p-6 sm:p-8 shadow-lg lg:col-span-2 relative overflow-hidden bg-gradient-to-r from-slate-900 to-indigo-950/20">
+                <div class="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
+                    <div class="w-16 h-16 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-3xl shrink-0">
+                        <i class="fa-solid fa-puzzle-piece"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-xl font-bold text-white mb-2">Adım 1: Kuyruğu Kes, Kökü Bul!</h2>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-6">
+                            Almancada sözlükte gördüğün tüm fiiller istisnasız olarak <b>"-en"</b> veya bazen <b>"-n"</b> takısıyla biter. Biz buna "kuyruk" diyoruz. Cümle kurmak için ilk işimiz, bu kuyruğu makasla kesip atmaktır! Geriye kalan parçaya <b>Fiil Kökü</b> diyoruz.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-slate-950 border border-slate-800 rounded-xl p-4 text-center">
+                                <div class="text-slate-500 text-xs font-bold uppercase mb-2">Fiilin Sözlük Hali</div>
+                                <div class="text-2xl font-black text-white">lern<span class="text-rose-400">en</span></div>
+                                <div class="text-xs text-slate-400 mt-1">(Öğrenmek)</div>
+                            </div>
+                            
+                            <div class="flex items-center justify-center">
+                                <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-rose-400 text-xl border border-slate-700">
+                                    <i class="fa-solid fa-scissors"></i>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-950 border border-indigo-500/30 rounded-xl p-4 text-center relative overflow-hidden">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-indigo-500"></div>
+                                <div class="text-indigo-400 text-xs font-bold uppercase mb-2">Saf Fiil Kökü</div>
+                                <div class="text-2xl font-black text-white tracking-widest">lern</div>
+                                <div class="text-xs text-slate-400 mt-1">İşte bütün olay bu parçada bitiyor!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADIM 2: SİHİRLİ TAKILAR (ÇEKİM) -->
+            <div class="dashboard-card border rounded-3xl p-6 sm:p-8 shadow-lg hover:border-violet-500/30 transition-all">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">Adım 2: Sihirli Takılar</h2>
+                </div>
+                <p class="text-sm text-slate-400 mb-5">
+                    Bulduğumuz saf köke (örn: <b>lern</b>), kimin konuştuğuna göre farklı bir takım elbise giydiriyoruz. Bu takılar düzenli fiillerin hepsinde aynıdır!
+                </p>
+                
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-bold text-slate-400 w-24">ich (ben)</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-white font-mono text-lg">lern</span>
+                            <span class="font-black text-violet-400 text-xl">-e</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-bold text-slate-400 w-24">du (sen)</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-white font-mono text-lg">lern</span>
+                            <span class="font-black text-violet-400 text-xl">-st</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-bold text-slate-400 w-24">er/sie/es (o)</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-white font-mono text-lg">lern</span>
+                            <span class="font-black text-violet-400 text-xl">-t</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-bold text-slate-400 w-24">wir (biz)</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-white font-mono text-lg">lern</span>
+                            <span class="font-black text-violet-400 text-xl">-en</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-bold text-slate-400 w-24">ihr (siz)</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-white font-mono text-lg">lern</span>
+                            <span class="font-black text-violet-400 text-xl">-t</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-slate-950 rounded-xl border border-slate-800">
+                        <span class="font-bold text-slate-400 w-24">sie/Sie (onlar/Siz)</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-white font-mono text-lg">lern</span>
+                            <span class="font-black text-violet-400 text-xl">-en</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 p-3 rounded-lg bg-violet-500/10 border border-violet-500/20 text-center">
+                    <p class="text-xs font-semibold text-violet-300">💡 <b>TÜYO:</b> Yukarıdan aşağı okursan takılar "e - st - t - en - t - en" diye gider.</p>
+                </div>
+            </div>
+
+            <!-- DİĞER ÖRNEKLER -->
+            <div class="dashboard-card border rounded-3xl p-6 sm:p-8 shadow-lg hover:border-sky-500/30 transition-all flex flex-col">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">Aynı Kural, Farklı Fiiller</h2>
+                </div>
+                <p class="text-sm text-slate-400 mb-5">
+                    Bu makine her Düzenli Fiil (Grup 1) için tıkır tıkır çalışır. Kökü bul, takıyı ekle!
+                </p>
+                
+                <div class="space-y-4 flex-1">
+                    
+                    <!-- FRAGEN -->
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden">
+                        <div class="bg-slate-900 py-2 px-4 border-b border-slate-800 flex justify-between items-center">
+                            <span class="font-bold text-white">fragen <span class="text-xs text-slate-400 font-normal ml-1">(sormak)</span></span>
+                            <span class="text-xs text-sky-400 font-mono">Kök: frag</span>
+                        </div>
+                        <div class="p-4 grid grid-cols-2 gap-4 text-sm">
+                            <div><span class="text-slate-500">ich</span> frag<b class="text-sky-400">e</b></div>
+                            <div><span class="text-slate-500">wir</span> frag<b class="text-sky-400">en</b></div>
+                            <div><span class="text-slate-500">du</span> frag<b class="text-sky-400">st</b></div>
+                            <div><span class="text-slate-500">ihr</span> frag<b class="text-sky-400">t</b></div>
+                            <div><span class="text-slate-500">er/sie/es</span> frag<b class="text-sky-400">t</b></div>
+                            <div><span class="text-slate-500">sie/Sie</span> frag<b class="text-sky-400">en</b></div>
+                        </div>
+                    </div>
+
+                    <!-- KOMMEN -->
+                    <div class="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden">
+                        <div class="bg-slate-900 py-2 px-4 border-b border-slate-800 flex justify-between items-center">
+                            <span class="font-bold text-white">kommen <span class="text-xs text-slate-400 font-normal ml-1">(gelmek)</span></span>
+                            <span class="text-xs text-sky-400 font-mono">Kök: komm</span>
+                        </div>
+                        <div class="p-4 grid grid-cols-2 gap-4 text-sm">
+                            <div><span class="text-slate-500">ich</span> komm<b class="text-sky-400">e</b></div>
+                            <div><span class="text-slate-500">wir</span> komm<b class="text-sky-400">en</b></div>
+                            <div><span class="text-slate-500">du</span> komm<b class="text-sky-400">st</b></div>
+                            <div><span class="text-slate-500">ihr</span> komm<b class="text-sky-400">t</b></div>
+                            <div><span class="text-slate-500">er/sie/es</span> komm<b class="text-sky-400">t</b></div>
+                            <div><span class="text-slate-500">sie/Sie</span> komm<b class="text-sky-400">en</b></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- GELECEK GRUPLAR (KİLİTLİ ALAN) -->
+            <div class="dashboard-card border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-lg lg:col-span-2 relative overflow-hidden flex flex-col justify-center items-center text-center opacity-90 bg-gradient-to-t from-slate-950 to-transparent">
+                <!-- Kilit Overlay -->
+                <div class="absolute inset-0 z-10 flex flex-col items-center justify-center p-6 space-y-3">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-800 text-slate-400 flex items-center justify-center text-2xl font-bold shadow-inner border border-slate-700">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h4 class="font-black text-white text-lg">Diğer 7 Fiil Grubu</h4>
+                    <p class="text-xs text-slate-400 max-w-md leading-relaxed">
+                        Almancada <b>Ayrılabilen Fiiller (Grup 2)</b>, <b>Düzensiz Fiiller (Grup 3)</b> ve <b>Modal Fiiller (Grup 4)</b> gibi diğer gruplar, bu sayfadaki temel kuralı (Grup 1) tamamen refleks haline getirdiğinde aşama aşama açılacaktır.
+                    </p>
+                </div>
+                
+                <!-- Arka Planda Silik Görünen İçerik -->
+                <div class="w-full flex gap-4 justify-center opacity-10 pointer-events-none filter blur-[3px] pt-10 pb-4">
+                    <div class="h-24 w-32 bg-slate-800 rounded-xl"></div>
+                    <div class="h-24 w-32 bg-slate-800 rounded-xl"></div>
+                    <div class="h-24 w-32 bg-slate-800 rounded-xl hidden sm:block"></div>
+                </div>
+            </div>
+
+            <!-- PRATİK YÖNLENDİRMESİ (YENİ EKLENEN CTA) -->
+            <div class="dashboard-card border border-violet-500/50 rounded-3xl p-6 sm:p-8 shadow-lg lg:col-span-2 relative overflow-hidden bg-gradient-to-r from-indigo-900/40 to-violet-900/20 text-center flex flex-col items-center justify-center space-y-4">
+                <div class="w-16 h-16 rounded-full bg-violet-500/20 text-violet-400 flex items-center justify-center text-3xl shadow-inner mb-2">
+                    <i class="fa-solid fa-dumbbell"></i>
+                </div>
+                <h3 class="text-2xl font-black text-white">Lego Parçalarını Birleştir!</h3>
+                <p class="text-sm text-slate-300 max-w-md">
+                    Kökleri ve takıları öğrendiğine göre artık motoru çalıştırma vakti. Fiil çekimlerini refleks haline getirmek için testlere başla.
+                </p>
+                <button onclick="window.location.href='alistirma_fiiller.html'" class="px-8 py-4 bg-violet-600 hover:bg-violet-500 text-white font-bold text-lg rounded-2xl shadow-xl shadow-violet-500/20 transition-all hover:-translate-y-1 mt-4">
+                    Fiil Çekim Motoruna Git <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>
