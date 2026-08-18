@@ -6,8 +6,6 @@
     <title>Alıştırmalar - Almanca Dünyası</title>
 
     <meta name="theme-color" content="#080d1a">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -31,12 +29,10 @@
         body { 
             font-family: 'Inter', sans-serif; 
             transition: background-color 0.5s ease;
-            /* Mobilde kaydırma titreşimlerini ve esnemelerini engeller */
-            overscroll-behavior-y: none;
         }
         
         .choice-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .choice-card:hover { transform: translateY(-6px); }
+        .choice-card:hover { transform: translateY(-10px); }
 
         /* =================================================================
            ÖĞRENME MAKİNESİ (ÇALIŞMA EKRANI) STİLLERİ
@@ -68,50 +64,143 @@
             text-align: center;
             margin: 0 auto;
         }
-        @media (min-width: 640px) {
-            .study-card {
-                padding: 30px 32px 40px 32px;
-            }
-        }
         
-        .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .progress-text { font-size: 14px; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; margin: 0; }
-        .sound-btn { background: #f3f4f6; border: none; border-radius: 20px; padding: 6px 12px; font-size: 12px; font-weight: 700; color: var(--text); cursor: pointer; transition: 0.2s; }
+        .header-row { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 12px; 
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .progress-text { 
+            font-size: 14px; 
+            color: var(--muted); 
+            font-weight: 600; 
+            letter-spacing: 0.5px; 
+            margin: 0; 
+        }
+        .sound-btn { 
+            background: #f3f4f6; 
+            border: none; 
+            border-radius: 20px; 
+            padding: 5px 12px; 
+            font-size: 12px; 
+            font-weight: 700; 
+            color: var(--text); 
+            cursor: pointer; 
+            transition: 0.2s; 
+            white-space: nowrap;
+        }
         .sound-btn:hover { background: #e5e7eb; }
 
-        .timer-container { width: 100%; height: 8px; background: #e5e7eb; border-radius: 4px; margin-bottom: 20px; overflow: hidden; }
-        .timer-bar { height: 100%; width: 100%; background: var(--green); transition: width 1s linear, background-color 0.3s ease; }
+        .timer-container { 
+            width: 100%; 
+            height: 6px; 
+            background: #e5e7eb; 
+            border-radius: 4px; 
+            margin-bottom: 16px; 
+            overflow: hidden; 
+        }
+        .timer-bar { 
+            height: 100%; 
+            width: 100%; 
+            background: var(--green); 
+            transition: width 1s linear, background-color 0.3s ease; 
+        }
 
-        .stage-badge{ display:inline-block; font-size: 12px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; margin-bottom: 12px; }
+        .stage-badge{ 
+            display:inline-block; 
+            font-size: 12px; 
+            font-weight: 800; 
+            letter-spacing: 0.5px; 
+            text-transform: uppercase; 
+            padding: 5px 14px; 
+            border-radius: 999px; 
+            margin-bottom: 12px; 
+        }
         .stage-badge.stage1{ background: #dbeafe; color: var(--blue-dark); }
         .stage-badge.stage2{ background: #fef3c7; color: #92400e; }
         .stage-badge.penalty{ background: #fee2e2; color: #991b1b; }
         
-        .turkce-text{ font-size: 32px; font-weight: 800; color: var(--text); margin: 0 0 6px 0; line-height: 1.2; }
-        @media (min-width: 640px) { .turkce-text { font-size: 40px; } }
-
-        .okunus-text{ font-size: 17px; color: var(--muted); margin: 0 0 24px 0; }
+        .turkce-text{ 
+            font-size: 32px; 
+            font-weight: 800; 
+            color: var(--text); 
+            margin: 0 0 6px 0; 
+            line-height: 1.2; 
+        }
+        .okunus-text{ 
+            font-size: 16px; 
+            color: var(--muted); 
+            margin: 0 0 20px 0; 
+        }
         .okunus-text span{ font-style: italic; }
         
-        .sentence{ font-size: 24px; font-weight: 700; color: var(--text); line-height: 1.4; margin: 0 0 6px 0; }
-        @media (min-width: 640px) { .sentence { font-size: 30px; } }
+        .sentence{ 
+            font-size: 22px; 
+            font-weight: 700; 
+            color: var(--text); 
+            line-height: 1.5; 
+            margin: 0 0 6px 0; 
+            word-break: break-word;
+        }
         .sentence b{ color: var(--orange); font-weight: 900; }
-        .sentence .blank-marker{ display:inline-block; min-width: 60px; border-bottom: 3px solid var(--blue); }
+        .sentence .blank-marker{ 
+            display:inline-block; 
+            min-width: 60px; 
+            border-bottom: 3px solid var(--blue); 
+        }
         
-        .sentence-tr { font-size: 15px; color: var(--muted); margin: 0 0 20px 0; font-weight: 500; }
-        @media (min-width: 640px) { .sentence-tr { font-size: 17px; } }
+        .sentence-tr { 
+            font-size: 15px; 
+            color: var(--muted); 
+            margin: 0 0 20px 0; 
+            font-weight: 500; 
+        }
         
-        input#answer{ width: 100%; font-size: 22px; text-align: center; padding: 14px 10px; border: 3px solid var(--border); border-radius: 14px; outline: none; color: var(--text); background: #fafafa; transition: border-color 0.2s ease, background-color 0.2s ease; }
-        @media (min-width: 640px) { input#answer { font-size: 26px; padding: 16px 10px; } }
+        input#answer{ 
+            width: 100%; 
+            font-size: 22px; 
+            text-align: center; 
+            padding: 14px 10px; 
+            border: 3px solid var(--border); 
+            border-radius: 14px; 
+            outline: none; 
+            color: var(--text); 
+            background: #fafafa; 
+            transition: border-color 0.2s ease, background-color 0.2s ease; 
+            box-sizing: border-box;
+        }
         input#answer:focus{ border-color: var(--blue); background: #ffffff; }
         input#answer.wrong{ border-color: var(--red); background: #fef2f2; animation: shake 0.4s; }
         input#answer.correct{ border-color: var(--green); background: #f0fdf4; }
         
-        @keyframes shake{ 0% { transform: translateX(0); } 20% { transform: translateX(-10px); } 40% { transform: translateX(10px); } 60% { transform: translateX(-8px); } 80% { transform: translateX(8px); } 100% { transform: translateX(0); } }
+        @keyframes shake{ 
+            0% { transform: translateX(0); } 
+            20% { transform: translateX(-8px); } 
+            40% { transform: translateX(8px); } 
+            60% { transform: translateX(-6px); } 
+            80% { transform: translateX(6px); } 
+            100% { transform: translateX(0); } 
+        }
         
-        .app-buttons{ margin-top: 20px; display:flex; flex-direction: column; gap: 12px; }
-        .app-btn{ font-size: 18px; font-weight: 700; padding: 14px; border-radius: 14px; border: none; cursor: pointer; transition: transform 0.15s ease, background-color 0.15s ease, opacity 0.15s ease; }
-        @media (min-width: 640px) { .app-btn { font-size: 20px; padding: 16px; } }
+        .app-buttons{ 
+            margin-top: 20px; 
+            display:flex; 
+            flex-direction: column; 
+            gap: 12px; 
+        }
+        .app-btn{ 
+            font-size: 18px; 
+            font-weight: 700; 
+            padding: 14px; 
+            border-radius: 14px; 
+            border: none; 
+            cursor: pointer; 
+            transition: transform 0.15s ease, background-color 0.15s ease, opacity 0.15s ease; 
+            width: 100%;
+        }
         .app-btn:active{ transform: scale(0.97); }
         
         #checkBtn{ background: var(--blue); color: #fff; }
@@ -119,18 +208,109 @@
         #checkBtn.shake-btn{ animation: shake 0.4s; }
         #checkBtn.ready-to-continue{ background: var(--green); }
         
-        #hintBtn{ background: #fff; color: var(--muted); border: 2px solid var(--border); }
+        #hintBtn{ 
+            background: #fff; 
+            color: var(--muted); 
+            border: 2px solid var(--border); 
+        }
         #hintBtn:hover{ background: #f3f4f6; }
         #hintBtn:disabled{ opacity: 0.5; cursor: not-allowed; }
         
-        .hint-box{ margin-top: 14px; font-size: 24px; font-weight: 800; color: var(--blue); min-height: 32px; letter-spacing: 1px; }
-        .feedback{ margin-top: 12px; font-size: 16px; font-weight: 700; min-height: 24px; }
+        .hint-box{ 
+            margin-top: 12px; 
+            font-size: 24px; 
+            font-weight: 800; 
+            color: var(--blue); 
+            min-height: 34px; 
+            letter-spacing: 1px; 
+        }
+        .feedback{ 
+            margin-top: 12px; 
+            font-size: 16px; 
+            font-weight: 700; 
+            min-height: 24px; 
+        }
         .feedback.wrong{ color: var(--red); }
         .feedback.correct{ color: var(--green); }
-        .finished{ font-size: 24px; font-weight: 800; color: var(--green); }
+        .finished{ font-size: 22px; font-weight: 800; color: var(--green); }
         
-        .confetti-piece{ position: fixed; top: -20px; width: 10px; height: 16px; opacity: 0.9; z-index: 999; pointer-events: none; animation: fall linear forwards; }
-        @keyframes fall{ to{ transform: translateY(110vh) rotate(360deg); opacity: 0.3; } }
+        .confetti-piece{ 
+            position: fixed; 
+            top: -20px; 
+            width: 8px; 
+            height: 14px; 
+            opacity: 0.9; 
+            z-index: 999; 
+            pointer-events: none; 
+            animation: fall linear forwards; 
+        }
+        @keyframes fall{ 
+            to{ transform: translateY(110vh) rotate(360deg); opacity: 0.3; } 
+        }
+
+        /* =================================================================
+           MOBİL ÖZEL DÜZENLEMELER
+           ================================================================= */
+        @media (max-width: 640px) {
+            .study-card {
+                padding: 20px 16px 28px 16px;
+                border-radius: 20px;
+            }
+            
+            .turkce-text { font-size: 28px; }
+            .sentence { font-size: 19px; }
+            .sentence .blank-marker { min-width: 50px; }
+            input#answer { font-size: 20px; padding: 12px 8px; }
+            .app-btn { font-size: 16px; padding: 12px; }
+            
+            .header-row .progress-text { font-size: 13px; }
+            .header-row .sound-btn { font-size: 11px; padding: 4px 10px; }
+            
+            .stage-badge { font-size: 11px; padding: 4px 12px; }
+            .sentence-tr { font-size: 14px; }
+            .hint-box { font-size: 20px; min-height: 30px; }
+            .feedback { font-size: 15px; min-height: 22px; }
+            
+            .choice-card {
+                padding: 24px 20px !important;
+                border-radius: 2rem !important;
+            }
+            .choice-card .w-20 { width: 64px; height: 64px; font-size: 24px; }
+            .choice-card h3 { font-size: 20px; }
+            .choice-card p { font-size: 13px; }
+        }
+
+        @media (max-width: 400px) {
+            .study-card { padding: 16px 12px 24px 12px; }
+            .turkce-text { font-size: 24px; }
+            .sentence { font-size: 17px; }
+            input#answer { font-size: 18px; padding: 10px 6px; }
+            .app-btn { font-size: 15px; padding: 10px; }
+            .sentence .blank-marker { min-width: 40px; }
+        }
+
+        /* Menü kartlarının mobilde düzgün görünmesi için */
+        #mainMenu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+        #mainMenu .choice-card {
+            width: 100%;
+            max-width: 380px;
+        }
+
+        @media (min-width: 768px) {
+            #mainMenu {
+                flex-direction: row;
+                align-items: stretch;
+                justify-content: center;
+            }
+            #mainMenu .choice-card {
+                max-width: 340px;
+            }
+        }
     </style>
 </head>
 <body id="body" class="bg-slate-950 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white relative">
@@ -146,56 +326,59 @@
                 <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-slate-700 transition-colors">
                     <i class="fa-solid fa-arrow-left text-sm"></i>
                 </div>
-                <span class="text-xs sm:text-sm">Karargaha Dön</span>
+                <span class="hidden sm:inline">Karargaha Dön</span>
+                <span class="sm:hidden">Geri</span>
             </button>
             <div class="flex items-center gap-2">
                 <span class="px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold flex items-center gap-1.5">
-                    <i class="fa-solid fa-dumbbell text-emerald-400"></i> Pratik Merkezi
+                    <i class="fa-solid fa-dumbbell text-emerald-400"></i>
+                    <span class="hidden sm:inline">Pratik Merkezi</span>
+                    <span class="sm:hidden">Pratik</span>
                 </span>
             </div>
         </div>
     </header>
 
     <!-- ANA İÇERİK -->
-    <main class="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-8 space-y-8 sm:space-y-12 relative z-10 pb-20 flex flex-col justify-start sm:justify-center my-auto">
+    <main class="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-8 space-y-8 relative z-10 pb-20 flex flex-col">
 
         <!-- BAŞLIK -->
-        <div id="pageTitle" class="space-y-3 text-center md:text-left mt-2">
+        <div id="pageTitle" class="space-y-3 text-center mt-2">
             <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight">A1 Egzersizleri</h1>
-            <p class="text-slate-400 text-xs sm:text-base max-w-2xl leading-relaxed mx-auto md:mx-0">
-                Kuralları bilmek yetmez, onları refleks haline getirmek gerekir. Kendini test etmek istediğin modülü seç ve kas hafızanı güçlendir.[cite: 7]
+            <p class="text-slate-400 text-sm sm:text-base max-w-2xl leading-relaxed mx-auto">
+                Kuralları bilmek yetmez, onları refleks haline getirmek gerekir. Kendini test etmek istediğin modülü seç ve kas hafızanı güçlendir.
             </p>
         </div>
 
         <!-- =========================================================
              ANA MENÜ KARTLARI
              ========================================================= -->
-        <div id="mainMenu" class="flex flex-col md:flex-row gap-6 sm:gap-8 w-full justify-center md:justify-start">
+        <div id="mainMenu" class="flex flex-col md:flex-row gap-6 w-full justify-center">
             
-            <div onclick="startApp('fiil')" class="choice-card cursor-pointer bg-slate-900/60 backdrop-blur-md border border-purple-500/30 hover:border-purple-400 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 flex flex-col items-center text-center shadow-xl hover:shadow-[0_0_50px_rgba(168,85,247,0.2)] group relative overflow-hidden flex-1 max-w-sm mx-auto md:mx-0 w-full">
+            <div onclick="startApp('fiil')" class="choice-card cursor-pointer bg-slate-900/60 backdrop-blur-md border border-purple-500/30 hover:border-purple-400 rounded-[2.5rem] p-8 flex flex-col items-center text-center shadow-xl hover:shadow-[0_0_50px_rgba(168,85,247,0.2)] group relative overflow-hidden flex-1 max-w-sm">
                 <div class="absolute -inset-4 bg-gradient-to-b from-purple-500/0 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-[2rem] bg-gradient-to-br from-purple-400 to-fuchsia-600 text-white flex items-center justify-center text-2xl sm:text-3xl shadow-lg shadow-purple-500/30 mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500">
+                <div class="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-purple-400 to-fuchsia-600 text-white flex items-center justify-center text-3xl shadow-lg shadow-purple-500/30 mb-6 group-hover:scale-110 transition-transform duration-500">
                     <i class="fa-solid fa-bolt"></i>
                 </div>
-                <h3 class="text-xl sm:text-2xl font-black text-white mb-2 sm:mb-3">Fiil Öğren[cite: 7]</h3>
-                <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6 sm:mb-8 flex-1">
-                    Almancada en sık kullanılan fiilleri keşfet, çekim kurallarını kavra ve cümle içinde nasıl kullanıldıklarını öğren.[cite: 7]
+                <h3 class="text-2xl font-black text-white mb-3">Fiil Öğren</h3>
+                <p class="text-sm text-slate-400 leading-relaxed mb-8 flex-1">
+                    Almancada en sık kullanılan fiilleri keşfet, çekim kurallarını kavra ve cümle içinde nasıl kullanıldıklarını öğren.
                 </p>
-                <div class="w-full py-3.5 sm:py-4 bg-purple-500/10 group-hover:bg-purple-500 text-purple-400 group-hover:text-white font-bold text-xs sm:text-sm rounded-2xl transition-all duration-300 flex items-center justify-center gap-2">
+                <div class="w-full py-4 bg-purple-500/10 group-hover:bg-purple-500 text-purple-400 group-hover:text-white font-bold rounded-2xl transition-all duration-300 flex items-center justify-center gap-2">
                     Hemen Başla <i class="fa-solid fa-play"></i>
                 </div>
             </div>
 
-            <div onclick="startApp('kelime')" class="choice-card cursor-pointer bg-slate-900/60 backdrop-blur-md border border-rose-500/30 hover:border-rose-400 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 flex flex-col items-center text-center shadow-xl hover:shadow-[0_0_50px_rgba(244,63,94,0.2)] group relative overflow-hidden flex-1 max-w-sm mx-auto md:mx-0 w-full">
+            <div onclick="startApp('kelime')" class="choice-card cursor-pointer bg-slate-900/60 backdrop-blur-md border border-rose-500/30 hover:border-rose-400 rounded-[2.5rem] p-8 flex flex-col items-center text-center shadow-xl hover:shadow-[0_0_50px_rgba(244,63,94,0.2)] group relative overflow-hidden flex-1 max-w-sm">
                 <div class="absolute -inset-4 bg-gradient-to-b from-rose-500/0 to-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-[2rem] bg-gradient-to-br from-rose-400 to-red-600 text-white flex items-center justify-center text-2xl sm:text-3xl shadow-lg shadow-rose-500/30 mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500">
+                <div class="w-20 h-20 rounded-[2rem] bg-gradient-to-br from-rose-400 to-red-600 text-white flex items-center justify-center text-3xl shadow-lg shadow-rose-500/30 mb-6 group-hover:scale-110 transition-transform duration-500">
                     <i class="fa-solid fa-layer-group"></i>
                 </div>
-                <h3 class="text-xl sm:text-2xl font-black text-white mb-2 sm:mb-3">Kelime Öğren[cite: 7]</h3>
-                <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6 sm:mb-8 flex-1">
-                    Günlük hayatta ihtiyacın olacak kelimeleri artikelleriyle birlikte öğren, ezberle ve kelime dağarcığını hızla geliştir.[cite: 7]
+                <h3 class="text-2xl font-black text-white mb-3">Kelime Öğren</h3>
+                <p class="text-sm text-slate-400 leading-relaxed mb-8 flex-1">
+                    Günlük hayatta ihtiyacın olacak kelimeleri artikelleriyle birlikte öğren, ezberle ve kelime dağarcığını hızla geliştir.
                 </p>
-                <div class="w-full py-3.5 sm:py-4 bg-rose-500/10 group-hover:bg-rose-500 text-rose-400 group-hover:text-white font-bold text-xs sm:text-sm rounded-2xl transition-all duration-300 flex items-center justify-center gap-2">
+                <div class="w-full py-4 bg-rose-500/10 group-hover:bg-rose-500 text-rose-400 group-hover:text-white font-bold rounded-2xl transition-all duration-300 flex items-center justify-center gap-2">
                     Çok Yakında <i class="fa-solid fa-clock"></i>
                 </div>
             </div>
@@ -248,7 +431,7 @@
    ========================================================================= */
 function startApp(mode) {
     if (mode === 'kelime') {
-        alert("Kelime Öğrenme modülü henüz eklenmedi. Lütfen 'Fiil Öğren' seçeneği ile devam et.");[cite: 7]
+        alert("Kelime Öğrenme modülü henüz eklenmedi. Lütfen 'Fiil Öğren' seçeneği ile devam et.");
         return;
     }
     document.getElementById('mainMenu').style.display = 'none';
@@ -264,7 +447,7 @@ function startApp(mode) {
 }
 
 /* =========================================================================
-   KELİME / CÜMLE VERİ SETİ
+   KELİME / CÜMLE VERİ SETİ (Türkçe Çeviriler Eklendi)
    ========================================================================= */
 const kelimeler = [
     {
@@ -357,6 +540,7 @@ function initQueue(){
         }
     }
     totalQuestions = mainQueue.length;
+    questionCounter = 0;
 }
 
 /* =========================================================================
