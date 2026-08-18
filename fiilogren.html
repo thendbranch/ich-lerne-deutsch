@@ -251,7 +251,7 @@
         }
 
         /* =================================================================
-           MOBİL ÖZEL DÜZENLEMELER - DAHA KOMPAKT
+           MOBİL ÖZEL DÜZENLEMELER
            ================================================================= */
         @media (max-width: 640px) {
             .study-card {
@@ -327,18 +327,15 @@
             .stage-badge { font-size: 9px; padding: 2px 8px; }
         }
 
-        /* Klavye açıldığında sayfanın kaymasını engelle */
         body.app-active {
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Input odaklandığında scroll olmaması için */
         input#answer:focus {
             outline: none;
         }
 
-        /* Menü kartları */
         #mainMenu {
             display: flex;
             flex-direction: column;
@@ -496,6 +493,241 @@ function startApp(mode) {
 }
 
 /* =========================================================================
+   PROFESYONEL SES SİSTEMİ - Chrome & Safari Uyumlu (Kadın Ses)
+   ========================================================================= */
+
+// Ses motoru değişkenleri
+let selectedVoice = null;
+let voiceListLoaded = false;
+let isSoundOn = true;
+
+// En iyi Almanca kadın sesini bul
+function getBestGermanVoice(voices) {
+    // 1. Chrome: Google Wavenet kadın sesi (en iyi kalite)
+    let voice = voices.find(v => 
+        v.lang.startsWith('de') && 
+        (v.name.includes('Google') && (v.name.includes('Wavenet-B') || v.name.includes('Neural2-B') || v.name.includes('Wavenet-C')))
+    );
+    
+    // 2. Chrome: Diğer Google kadın sesleri
+    if (!voice) {
+        voice = voices.find(v => 
+            v.lang.startsWith('de') && 
+            v.name.includes('Google') && 
+            (v.name.includes('Wavenet') || v.name.includes('Neural'))
+        );
+    }
+    
+    // 3. Safari: Apple Anna (kadın, Almanca)
+    if (!voice) {
+        voice = voices.find(v => 
+            v.lang.startsWith('de') && 
+            (v.name.includes('Anna') || v.name.includes('Samantha') || v.name.includes('Siri'))
+        );
+    }
+    
+    // 4. Herhangi bir Almanca kadın sesi
+    if (!voice) {
+        voice = voices.find(v => 
+            v.lang.startsWith('de') && 
+            (v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('kadın'))
+        );
+    }
+    
+    // 5. İlk Almanca ses
+    if (!voice) {
+        voice = voices.find(v => v.lang.startsWith('de'));
+    }
+    
+    // 6. Varsayılan (herhangi bir ses)
+    if (!voice && voices.length > 0) {
+        voice = voices[0];
+    }
+    
+    return voice;
+}
+
+// Sesleri yükle ve en iyisini seç
+function loadVoices() {
+    try {
+        const voices = window.speechSynthesis.getVoices();
+        if (!voices || voices.length === 0) {
+            // Sesler henüz yüklenmemiş, bekle
+            setTimeout(loadVoices, 200);
+            return;
+        }
+        
+        const best = getBestGermanVoice(voices);
+        if (best) {
+            selectedVoice = best;
+            voiceListLoaded = true;
+            console.log('🎤 Ses seçildi:', best.name, '(' + best.lang + ')');
+        } else {
+            console.warn('⚠️ Almanca ses bulunamadı, varsayılan kullanılacak');
+            if (voices.length > 0) {
+                selectedVoice = voices[0];
+                voiceListLoaded = true;
+            }
+        }
+    } catch (e) {
+        console.warn('⚠️ Ses yükleme hatası:', e);
+    }
+}
+
+// Ses sistemini başlat
+function initVoiceSystem() {
+    if (!('speechSynthesis' in window)) {
+        console.warn('⚠️ SpeechSynthesis desteklenmiyor');
+        return;
+    }
+    
+    // Hemen dene
+    setTimeout(() => {
+        try {
+            const voices = window.speechSynthesis.getVoices();
+            if (voices && voices.length > 0) {
+                loadVoices();
+            }
+        } catch (e) {}
+    }, 100);
+    
+    // Değişiklik dinle (Safari için kritik)
+    window.speechSynthesis.onvoiceschanged = function() {
+        loadVoices();
+    };
+    
+    // Yedek: 1 saniye sonra tekrar dene
+    setTimeout(loadVoices, 1000);
+    
+    // 3 saniye sonra hala yüklenmediyse tekrar dene
+    setTimeout(loadVoices, 3000);
+}
+
+// Ses sistemini başlat
+initVoiceSystem();
+
+// Ses aç/kapat
+function toggleSound() {
+    isSoundOn = !isSoundOn;
+    const btn = document.getElementById('soundToggleBtn');
+    if (btn) {
+        btn.innerText = isSoundOn ? "🔊 Ses Açık" : "🔇 Ses Kapalı";
+    }
+}
+
+// HTML temizleme
+function stripHTML(html) {
+    let tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+}
+
+// YENİ: Profesyonel ses çalma fonksiyonu
+function playGermanSpeech() {
+    if (!isSoundOn) {
+        console.log('🔇 Ses kapalı');
+        return;
+    }
+    
+    if (!('speechSynthesis' in window)) {
+        console.warn('⚠️ SpeechSynthesis desteklenmiyor');
+        return;
+    }
+    
+    // currentQuestion kontrolü
+    if (!currentQuestion) {
+        console.warn('⚠️ Soru yüklenmemiş');
+        return;
+    }
+    
+    window.speechSynthesis.cancel();
+    
+    // Konuşulacak metni hazırla
+    let textToSpeak = "";
+    try {
+        if (currentQuestion.stage === 1) {
+            textToSpeak = kelimeler[currentQuestion.wordIndex].de;
+        } else {
+            let rawText = currentQuestion.sentence.text;
+            let filledText = rawText.replace("___", currentQuestion.sentence.answer);
+            textToSpeak = stripHTML(filledText);
+        }
+    } catch (e) {
+        console.warn('⚠️ Metin hazırlama hatası:', e);
+        return;
+    }
+    
+    // Eğer metin boşsa çık
+    if (!textToSpeak || textToSpeak.trim() === '') {
+        console.warn('⚠️ Konuşulacak metin yok');
+        return;
+    }
+    
+    try {
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.lang = 'de-DE';
+        utterance.rate = 0.85;      // Daha yavaş ve anlaşılır
+        utterance.pitch = 1.0;      // Doğal ton (kadın sesi için ideal)
+        utterance.volume = 1.0;     // Maksimum
+        
+        // Seçili sesi kullan
+        if (selectedVoice) {
+            utterance.voice = selectedVoice;
+            console.log('🎤 Konuşuyor:', selectedVoice.name, '→', textToSpeak);
+        } else {
+            // Ses seçili değilse, yeniden dene
+            loadVoices();
+            if (selectedVoice) {
+                utterance.voice = selectedVoice;
+            }
+            console.log('🎤 Varsayılan ses ile konuşuyor:', textToSpeak);
+        }
+        
+        // Hata durumunda
+        utterance.onerror = function(event) {
+            console.warn('⚠️ Ses sentez hatası:', event.error);
+        };
+        
+        // Başarılı olduğunda
+        utterance.onstart = function() {
+            console.log('🎤 Ses çalıyor...');
+        };
+        
+        utterance.onend = function() {
+            console.log('✅ Ses çalma tamamlandı');
+        };
+        
+        window.speechSynthesis.speak(utterance);
+    } catch (e) {
+        console.warn('⚠️ Ses çalma hatası:', e);
+    }
+}
+
+// Konsoldan test etmek için
+function testVoice() {
+    console.log('🎤 Test sesi çalınıyor...');
+    if (!('speechSynthesis' in window)) {
+        alert('Tarayıcınız ses sentezini desteklemiyor.');
+        return;
+    }
+    try {
+        const testUtter = new SpeechSynthesisUtterance('Hallo, wie geht es dir?');
+        testUtter.lang = 'de-DE';
+        testUtter.rate = 0.85;
+        testUtter.pitch = 1.0;
+        if (selectedVoice) {
+            testUtter.voice = selectedVoice;
+            console.log('🎤 Test sesi:', selectedVoice.name);
+        }
+        window.speechSynthesis.speak(testUtter);
+    } catch (e) {
+        console.warn('⚠️ Test hatası:', e);
+    }
+}
+
+console.log('🎤 Ses sistemi hazır. testVoice() ile test edebilirsin.');
+
+/* =========================================================================
    KELİME / CÜMLE VERİ SETİ
    ========================================================================= */
 const kelimeler = [
@@ -549,7 +781,6 @@ let questionCounter = 0;
 
 let timerInterval;
 let timeLeft = TIME_LIMIT;
-let isSoundOn = true;
 
 const bodyEl = document.getElementById('body');
 const cardEl = document.getElementById('card');
@@ -593,36 +824,8 @@ function initQueue(){
 }
 
 /* =========================================================================
-   SES VE ZAMANLAYICI SİSTEMİ
+   ZAMANLAYICI SİSTEMİ
    ========================================================================= */
-function toggleSound() {
-    isSoundOn = !isSoundOn;
-    soundToggleBtn.innerText = isSoundOn ? "🔊 Ses Açık" : "🔇 Ses Kapalı";
-}
-
-function stripHTML(html) {
-    let tmp = document.createElement("DIV");
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || "";
-}
-
-function playGermanSpeech() {
-    if(!isSoundOn || !('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel(); 
-    let textToSpeak = "";
-    if(currentQuestion.stage === 1){
-        textToSpeak = kelimeler[currentQuestion.wordIndex].de;
-    } else {
-        let rawText = currentQuestion.sentence.text;
-        let filledText = rawText.replace("___", currentQuestion.sentence.answer);
-        textToSpeak = stripHTML(filledText);
-    }
-    const utter = new SpeechSynthesisUtterance(textToSpeak);
-    utter.lang = 'de-DE';
-    utter.rate = 0.9; 
-    window.speechSynthesis.speak(utter);
-}
-
 function startTimer() {
     clearInterval(timerInterval);
     timeLeft = TIME_LIMIT;
@@ -667,7 +870,6 @@ function resetInputUI(){
     checkBtn.classList.remove('ready-to-continue');
     bodyEl.classList.remove('correct-flash', 'wrong-flash');
     isCorrect = false;
-    // Input'a odaklan ama klavye açılınca scroll yapma
     setTimeout(() => {
         answerEl.focus({ preventScroll: true });
     }, 100);
@@ -841,6 +1043,9 @@ answerEl.addEventListener('focus', () => {
         answerEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 300);
 });
+
+console.log('✅ Almanca Uygulaması Hazır!');
+console.log('🎤 testVoice() ile sesi test edebilirsin.');
 </script>
 </body>
 </html>
